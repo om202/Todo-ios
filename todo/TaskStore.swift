@@ -29,9 +29,9 @@ class TaskStore: ObservableObject {
 
     func toggleTask(_ task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            print("what index toggeling \(index)")
+            var updatedTask = task
             tasks[index].isDone.toggle()
-            print("what is task done \(tasks[index].isDone)")
+            tasks[index] = task
         }
     }
 
