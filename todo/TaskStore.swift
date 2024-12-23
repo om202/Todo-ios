@@ -29,9 +29,9 @@ class TaskStore: ObservableObject {
 
     func toggleTask(_ task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            var updatedTask = task
+            let updatedTask = task
             tasks[index].isDone.toggle()
-            tasks[index] = task
+            tasks[index] = updatedTask
         }
     }
 
@@ -46,7 +46,7 @@ class TaskStore: ObservableObject {
     }
 
     private func loadTasksFromUserDefaults() {
-        guard let savedData = try? UserDefaults.standard.data(forKey: tasksKey),
+        guard let savedData = UserDefaults.standard.data(forKey: tasksKey),
             let decodedData = try? JSONDecoder().decode(
                 [Task].self,
                 from: savedData

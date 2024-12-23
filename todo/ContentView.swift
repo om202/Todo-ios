@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var taskStore = TaskStore()
     @State private var editTask: Bool = false
+    let dateFormatter = DateFormatter()
 
     var body: some View {
         NavigationView {
@@ -25,6 +26,20 @@ struct ContentView: View {
                                 )
                                 Text(task.title)
                                     .strikethrough(task.isDone)
+
+                                Spacer()
+                                
+                                HStack {
+                                    Image(systemName: "calendar")
+                                    Text(
+                                        task.date.formatted(
+                                            .dateTime.month(.abbreviated).day())
+                                    )
+                                }
+                                .padding(4)
+                                .background(Color.indigo)
+                                .foregroundColor(Color.white)
+                                .cornerRadius(4)
                             }
                             .padding(8)
                             .foregroundColor(
@@ -51,7 +66,7 @@ struct ContentView: View {
                         .multilineTextAlignment(.center)
                     }
                 }
-                .navigationTitle("Tasks")
+                .navigationTitle("My Task")
 
                 VStack {
                     Spacer()
@@ -76,7 +91,6 @@ struct ContentView: View {
         }
     }
 }
-
 
 #Preview {
     ContentView()

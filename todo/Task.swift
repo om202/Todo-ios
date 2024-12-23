@@ -10,11 +10,18 @@ import Foundation
 class Task: Identifiable, Codable {
     let id: UUID
     let title: String
+    var date: Date
     var isDone: Bool
-    
-    init(id: UUID = UUID(), title: String = "", isDone: Bool = false) {
+
+    init(
+        id: UUID = UUID(),
+        title: String = "",
+        date: Date = Date(),
+        isDone: Bool = false
+    ) {
         self.id = id
         self.title = title
+        self.date = date
         self.isDone = isDone
     }
 }
