@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  todo
-//
-//  Created by Omprakash Sah Kanu on 12/22/24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -20,6 +13,26 @@ struct ContentView: View {
                         ForEach(taskStore.tasks) { task in
                             Section {
                                 VStack(alignment: .leading) {
+                                    if task.time != nil {
+                                        HStack {
+                                            Spacer()
+                                            HStack {
+                                                Image(systemName: "clock")
+                                                Text(
+                                                    task.time?
+                                                        .formatted(
+                                                            .dateTime
+                                                                .hour()
+                                                                .minute()
+                                                        ) ?? ""
+                                                )
+                                            }
+                                            .strikethrough(false)
+                                        }
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                    }
+
                                     HStack {
                                         Image(
                                             systemName: task.isDone
@@ -28,56 +41,44 @@ struct ContentView: View {
                                         )
                                         VStack {
                                             Text(task.title)
-                                                .strikethrough(task.isDone)
                                         }
                                     }
 
-                                    if !task.isDone {
+                                    if !task.note.trimmingCharacters(
+                                        in: .whitespaces
+                                    ).isEmpty {
                                         HStack {
-                                            Spacer()
-                                            HStack {
-                                                Image(systemName: "calendar")
-                                                Text(
-                                                    task.date.formatted(
-                                                        .dateTime.month(
-                                                            .abbreviated
-                                                        )
-                                                        .day())
+                                            Text("Note")
+                                                .padding(.horizontal, 4)
+                                                .padding(.vertical, 3)
+                                                .background(
+                                                    Color.indigo.opacity(0.3)
                                                 )
-                                            }
-                                            if task.time != nil {
-                                                HStack {
-                                                    Image(systemName: "clock")
-                                                    Text(
-                                                        task.time?
-                                                            .formatted(
-                                                                .dateTime
-                                                                    .hour()
-                                                                    .minute()
-                                                            ) ?? ""
-                                                    )
-                                                }
-                                            }
+                                                .cornerRadius(2)
+                                            Text(task.note)
                                         }
-                                        .font(.subheadline)
                                         .foregroundColor(.gray)
+                                        .font(.subheadline)
                                     }
                                 }
+                                .opacity(task.isDone ? 0.4 : 1)
                                 .foregroundColor(
-                                    task.isDone
-                                        ? Color.primary.opacity(0.3)
-                                        : Color.primary
+                                    task.isDone ? Color.green : Color.primary
                                 )
-                                .onTapGesture {
+                            }
+                            .padding(.vertical, 8)
+                            .onTapGesture {
+                                withAnimation {
                                     taskStore.toggleTask(task)
                                 }
                             }
                         }
                         .onDelete { indices in
-                            taskStore.deleteTask(at: indices)
+                            withAnimation {
+                                taskStore.deleteTask(at: indices)
+                            }
                         }
                         .listSectionSpacing(16)
-
                     } else {
                         VStack {
                             Image(systemName: "cat")
@@ -127,7 +128,11 @@ struct ContentView: View {
                     Spacer()
                     HStack {
                         Spacer()
-                        Button(action: { editTask.toggle() }) {
+                        Button(action: {
+                            withAnimation {
+                                editTask.toggle()
+                            }
+                        }) {
                             Image(systemName: "plus")
                                 .font(.title)
                                 .padding(24)
