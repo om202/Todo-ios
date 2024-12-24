@@ -15,39 +15,82 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Main Content: Task List
                 List {
                     if taskStore.tasks.count > 0 {
                         ForEach(taskStore.tasks) { task in
-                            HStack {
-                                Image(
-                                    systemName: task.isDone
-                                        ? "checkmark.circle.fill" : "circle"
-                                )
-                                Text(task.title)
-                                    .strikethrough(task.isDone)
+                            Section {
+                                VStack(alignment: .leading) {
+                                    HStack {
+                                        Image(
+                                            systemName: task.isDone
+                                                ? "checkmark.circle.fill"
+                                                : "circle"
+                                        )
+                                        VStack {
+                                            Text(task.title)
+                                                .strikethrough(task.isDone)
+                                        }
+                                    }
 
-                                Spacer()
-                                
-                                HStack {
-                                    Image(systemName: "calendar")
-                                    Text(
-                                        task.date.formatted(
-                                            .dateTime.month(.abbreviated).day())
+                                    if !task.note.trimmingCharacters(
+                                        in: .whitespaces
+                                    ).isEmpty {
+                                        HStack {
+                                            VStack {
+                                                Text(task.note)
+                                                    .strikethrough(task.isDone)
+                                                    .font(.subheadline)
+                                                    .foregroundColor(
+                                                        task.isDone
+                                                            ? Color.primary
+                                                                .opacity(0.4)
+                                                            : .purple
+                                                    )
+                                            }
+                                        }
+                                    }
+
+                                    HStack {
+                                        Spacer()
+                                        HStack {
+                                            Image(systemName: "calendar")
+                                            Text(
+                                                task.date.formatted(
+                                                    .dateTime.month(
+                                                        .abbreviated
+                                                    )
+                                                    .day())
+                                            )
+                                        }
+                                        if task.time != nil {
+                                            HStack {
+                                                Image(systemName: "clock")
+                                                Text(
+                                                    task.time?
+                                                        .formatted(
+                                                            .dateTime
+                                                                .hour()
+                                                                .minute()
+                                                        ) ?? ""
+                                                )
+                                            }
+                                        }
+                                    }
+                                    .font(.subheadline)
+                                    .foregroundColor(
+                                        task.isDone
+                                            ? Color.primary.opacity(0.4)
+                                            : .purple
                                     )
                                 }
-                                .padding(4)
-                                .background(Color.indigo)
-                                .foregroundColor(Color.white)
-                                .cornerRadius(4)
-                            }
-                            .padding(8)
-                            .foregroundColor(
-                                task.isDone
-                                    ? Color.primary.opacity(0.5) : Color.primary
-                            )
-                            .onTapGesture {
-                                taskStore.toggleTask(task)
+                                .foregroundColor(
+                                    task.isDone
+                                        ? Color.primary.opacity(0.4)
+                                        : Color.primary
+                                )
+                                .onTapGesture {
+                                    taskStore.toggleTask(task)
+                                }
                             }
                         }
                         .onDelete { indices in
@@ -65,8 +108,9 @@ struct ContentView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .multilineTextAlignment(.center)
                     }
+
                 }
-                .navigationTitle("My Task")
+                .listSectionSpacing(20)
 
                 VStack {
                     Spacer()
@@ -88,6 +132,7 @@ struct ContentView: View {
             .sheet(isPresented: $editTask) {
                 AddTaskView(taskStore: taskStore)
             }
+            .navigationTitle("Hello")
         }
     }
 }

@@ -19,13 +19,20 @@ class TaskStore: ObservableObject {
         loadTasksFromUserDefaults()
     }
 
-    func addTask(title: String) {
+    func addTask(title: String, note: String, date: Date, time: Date?, deadline: Date?) {
         guard !title.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
-        let newTask = Task(title: title)
+        let newTask = Task(
+            title: title,
+            note: note,
+            date: date,
+            time: time,
+            deadline: deadline
+        )
         tasks.append(newTask)
     }
+    
 
     func toggleTask(_ task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
