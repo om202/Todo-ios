@@ -14,6 +14,8 @@ class TaskStore: ObservableObject {
         }
     }
     private let tasksKey = "tasksKey"
+    let vibMed = UIImpactFeedbackGenerator(style: .medium)
+
 
     init() {
         loadTasksFromUserDefaults()
@@ -31,18 +33,21 @@ class TaskStore: ObservableObject {
             deadline: deadline
         )
         tasks.append(newTask)
+        vibMed.impactOccurred()
     }
     
 
     func toggleTask(_ task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            vibMed.impactOccurred()
             let updatedTask = task
-            tasks[index].isDone.toggle()
+            updatedTask.isDone.toggle()
             tasks[index] = updatedTask
         }
     }
 
     func deleteTask(at offSet: IndexSet) {
+        vibMed.impactOccurred()
         tasks.remove(atOffsets: offSet)
     }
 

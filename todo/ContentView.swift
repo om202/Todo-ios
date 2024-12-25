@@ -8,6 +8,7 @@ struct ContentView: View {
 
     var formattedDate: String {
         let calendar = Calendar.current
+        
         if calendar.isDateInToday(selectedDate) {
             return "Today"
         } else if calendar.isDateInTomorrow(selectedDate) {
@@ -15,7 +16,7 @@ struct ContentView: View {
         } else if calendar.isDateInYesterday(selectedDate) {
             return "Yesterday"
         } else {
-            dateFormatter.dateStyle = .medium
+            dateFormatter.dateFormat = "E, MMM d"
             return dateFormatter.string(from: selectedDate)
         }
     }
@@ -40,16 +41,14 @@ struct ContentView: View {
                                 .font(.title3)
                                 .foregroundColor(.gray)
                             } else {
-                                ForEach(
-                                    filteredTask
-                                ) { task in
-                                    TaskSection(task: task)                                }
+                                ForEach(filteredTask) { task in
+                                    TaskSection(task: task)
+                                }
                                 .onDelete { indices in
                                     withAnimation {
                                         taskStore.deleteTask(at: indices)
                                     }
                                 }
-                                .listSectionSpacing(16)
                             }
                         } else {
                             VStack {
@@ -64,23 +63,30 @@ struct ContentView: View {
                             .multilineTextAlignment(.center)
                         }
                     }
+                    .scrollContentBackground(.hidden) // Hides the default background
+                    .background(
+                        LinearGradient(
+                            gradient: Gradient(
+                                colors: [Color.purple, Color.indigo]
+                            ),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ).opacity(0.6)
+                    )
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
                             Text("\(formattedDate)").bold().font(.title)
                         }
 
                         ToolbarItem(placement: .topBarTrailing) {
-                            Image("user")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 35, height: 35)
-                                .clipShape(Circle())
-                                .overlay(
-                                    Circle()
-                                        .stroke(
-                                            Color.gray.opacity(0.3),
-                                            lineWidth: 1)
-                                )
+                            Button (action: {}) {
+                                Image(systemName: "gear")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 32, height: 32)
+                            }
+                            .buttonStyle(.automatic)
+                            .foregroundColor(.primary)
                         }
                     }
                 }
