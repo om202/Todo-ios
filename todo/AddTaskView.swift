@@ -23,6 +23,8 @@ struct AddTaskView: View {
     // :: DeadLine ::
     @State private var showDeadlinePicker: Bool = false
     @State private var selectedDeadline: Date? = nil
+    // :: Keyboard Focus ::
+    @FocusState private var showKeyboard: Bool
 
     var body: some View {
         NavigationView {
@@ -32,6 +34,7 @@ struct AddTaskView: View {
                         Image(systemName: "pencil.and.list.clipboard")
                             .foregroundColor(.gray)
                         TextField("I want to ...", text: $taskTitle)
+                            .focused($showKeyboard)
                     }
 
                     Spacer()
@@ -218,6 +221,9 @@ struct AddTaskView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            showKeyboard = true
         }
     }
 }

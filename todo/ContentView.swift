@@ -3,147 +3,95 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var taskStore = TaskStore()
     @State private var editTask: Bool = false
+    @State private var selectedDate: Date = Date()
     let dateFormatter = DateFormatter()
+
+    var formattedDate: String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(selectedDate) {
+            return "Today"
+        } else if calendar.isDateInTomorrow(selectedDate) {
+            return "Tomorrow"
+        } else if calendar.isDateInYesterday(selectedDate) {
+            return "Yesterday"
+        } else {
+            dateFormatter.dateStyle = .medium
+            return dateFormatter.string(from: selectedDate)
+        }
+    }
 
     var body: some View {
         NavigationView {
-            ZStack {
-                List {
-                    if taskStore.tasks.count > 0 {
-                        ForEach(taskStore.tasks) { task in
-                            Section {
-                                VStack(alignment: .leading) {
-                                    if task.time != nil {
-                                        HStack {
-                                            Spacer()
-                                            HStack {
-                                                Image(systemName: "clock")
-                                                Text(
-                                                    task.time?
-                                                        .formatted(
-                                                            .dateTime
-                                                                .hour()
-                                                                .minute()
-                                                        ) ?? ""
-                                                )
-                                            }
-                                            .strikethrough(false)
-                                        }
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                    }
+            VStack {
+                HStack {
+                    List {
+                        if taskStore.tasks.count > 0 {
+                            let filteredTask = taskStore.tasks.filter {
+                                Calendar.current.isDate(
+                                    $0.date, inSameDayAs: selectedDate)
+                            }
 
-                                    HStack {
-                                        Image(
-                                            systemName: task.isDone
-                                                ? "checkmark.square.fill"
-                                                : "square"
-                                        )
-                                        VStack {
-                                            Text(task.title)
-                                        }
-                                    }
-
-                                    if !task.note.trimmingCharacters(
-                                        in: .whitespaces
-                                    ).isEmpty {
-                                        HStack {
-                                            Text("Note")
-                                                .padding(.horizontal, 4)
-                                                .padding(.vertical, 3)
-                                                .background(
-                                                    Color.indigo.opacity(0.3)
-                                                )
-                                                .cornerRadius(2)
-                                            Text(task.note)
-                                        }
-                                        .foregroundColor(.gray)
-                                        .font(.subheadline)
+                            if filteredTask.isEmpty {
+                                HStack {
+                                    Image(systemName: "tray")
+                                    Text("No Tasks")
+                                }
+                                .padding()
+                                .font(.title3)
+                                .foregroundColor(.gray)
+                            } else {
+                                ForEach(
+                                    filteredTask
+                                ) { task in
+                                    TaskSection(task: task)                                }
+                                .onDelete { indices in
+                                    withAnimation {
+                                        taskStore.deleteTask(at: indices)
                                     }
                                 }
-                                .opacity(task.isDone ? 0.4 : 1)
-                                .foregroundColor(
-                                    task.isDone ? Color.green : Color.primary
-                                )
+                                .listSectionSpacing(16)
                             }
-                            .padding(.vertical, 8)
-                            .onTapGesture {
-                                withAnimation {
-                                    taskStore.toggleTask(task)
-                                }
+                        } else {
+                            VStack {
+                                Image(systemName: "cat")
+                                    .font(.largeTitle)
+                                    .padding(.bottom, 8)
+                                Text("Use the + button to add tasks.")
+                                    .font(.headline)
+                                    .foregroundColor(.secondary)
                             }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            .multilineTextAlignment(.center)
                         }
-                        .onDelete { indices in
-                            withAnimation {
-                                taskStore.deleteTask(at: indices)
-                            }
-                        }
-                        .listSectionSpacing(16)
-                    } else {
-                        VStack {
-                            Image(systemName: "cat")
-                                .font(.largeTitle)
-                                .padding(.bottom, 8)
-                            Text("Nothing here!")
-                                .font(.headline)
-                                .foregroundColor(.secondary)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .multilineTextAlignment(.center)
                     }
-                }
-                .navigationTitle("My Tasks")
-                .toolbar {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: {
-                            // action here
-                        }) {
-                            Image(systemName: "line.3.horizontal")
+                    .toolbar {
+                        ToolbarItem(placement: .topBarLeading) {
+                            Text("\(formattedDate)").bold().font(.title)
                         }
-                        .buttonStyle(.borderless)
-                    }
 
-                    ToolbarItem(placement: .topBarTrailing) {
-                        HStack {
-                            Button(action: {
-                                // action here
-                            }) {
-                                Image(systemName: "chevron.left")
-                            }
-
-                            Button("Today") {
-                            }.buttonStyle(.borderless).bold()
-
-                            Button(action: {
-                                // action here
-                            }) {
-                                Image(systemName: "chevron.right")
-                            }
-                            .buttonStyle(.borderless)
-                        }.foregroundColor(Color.primary)
-                    }
-                }
-
-                VStack {
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            withAnimation {
-                                editTask.toggle()
-                            }
-                        }) {
-                            Image(systemName: "plus")
-                                .font(.title)
-                                .padding(24)
-                                .background(Color.indigo)
-                                .foregroundColor(.white)
+                        ToolbarItem(placement: .topBarTrailing) {
+                            Image("user")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 35, height: 35)
                                 .clipShape(Circle())
-                                .shadow(radius: 5)
+                                .overlay(
+                                    Circle()
+                                        .stroke(
+                                            Color.gray.opacity(0.3),
+                                            lineWidth: 1)
+                                )
                         }
-                        .padding()
                     }
                 }
+                .shadow(color: .black.opacity(0.1), radius: 1, x: 0, y: 1)
+
+                TaskMainFooter(
+                    selectedDate: $selectedDate,
+                    editTask: $editTask,
+                    formattedDate: formattedDate
+                )
+
             }
             .sheet(isPresented: $editTask) {
                 AddTaskView(taskStore: taskStore)
