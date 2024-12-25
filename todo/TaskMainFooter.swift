@@ -83,7 +83,6 @@ struct TaskMainFooter: View {
 
                     Spacer()
                 }
-                .padding()
                 .navigationBarItems(
                     trailing: Button("Done") {
                         isCalendarPresented = false
