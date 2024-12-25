@@ -45,9 +45,7 @@ struct ContentView: View {
                                     TaskSection(task: task)
                                 }
                                 .onDelete { indices in
-                                    withAnimation {
-                                        taskStore.deleteTask(at: indices)
-                                    }
+                                    taskStore.deleteTask(at: indices)
                                 }
                             }
                         } else {
