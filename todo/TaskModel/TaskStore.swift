@@ -15,8 +15,7 @@ class TaskStore: ObservableObject {
     }
     private let tasksKey = "tasksKey"
     let vibMed = UIImpactFeedbackGenerator(style: .medium)
-
-
+    
     init() {
         loadTasksFromUserDefaults()
     }

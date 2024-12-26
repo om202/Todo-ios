@@ -4,8 +4,8 @@ struct TaskMainFooter: View {
     @Binding var selectedDate: Date
     @Binding var editTask: Bool
     @State private var isCalendarPresented: Bool = false  // State to toggle calendar presentation
-    var formattedDate: String
     let vibMed = UIImpactFeedbackGenerator(style: .medium)
+    var formattedDate: String
 
     func addDays(_ days: Int) {
         if let newDate = Calendar.current.date(

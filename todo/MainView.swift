@@ -1,30 +1,13 @@
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject private var taskStore = TaskStore()
+struct MainView: View {
+    @EnvironmentObject var taskStore: TaskStore
     @State private var editTask: Bool = false
     @State private var selectedDate: Date = Date()
     @State var useImageBG: Bool = true
-    let dateFormatter = DateFormatter()
-
-    // MARK: - Date Format
-
-    var formattedDate: String {
-        let calendar = Calendar.current
-        
-        if calendar.isDateInToday(selectedDate) {
-            return "Today"
-        } else if calendar.isDateInTomorrow(selectedDate) {
-            return "Tomorrow"
-        } else if calendar.isDateInYesterday(selectedDate) {
-            return "Yesterday"
-        } else {
-            dateFormatter.dateFormat = "E, MMM d"
-            return dateFormatter.string(from: selectedDate)
-        }
+    private var formattedDate: String {
+        FormatDate(date: selectedDate)
     }
-
-    // MARK: - Body
 
     var body: some View {
         NavigationView {
@@ -69,21 +52,9 @@ struct ContentView: View {
                         }
                     }
                     .scrollContentBackground(.hidden)
-                    .background(
-                        useImageBG ?
-                        AnyView(Image("bg")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .edgesIgnoringSafeArea(.all)) :
-                        AnyView(LinearGradient(
-                            gradient: Gradient(colors: [Color.purple, Color.indigo]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ))
-                    )
                     .toolbar {
                         ToolbarItem(placement: .topBarLeading) {
-                            Text("\(formattedDate)")
+                            Text(formattedDate)
                                 .bold()
                                 .font(.title)
                         }
@@ -98,9 +69,20 @@ struct ContentView: View {
                             .foregroundColor(.primary)
                         }
                     }
+                    .background(
+                        useImageBG ?
+                        AnyView(Image("bg")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .edgesIgnoringSafeArea(.all)) :
+                        AnyView(LinearGradient(
+                            gradient: Gradient(colors: [Color.purple, Color.indigo]),
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ))
+                    )
                 }
-                .shadow(color: .black.opacity(0.1), radius: 1, x: 0, y: 1)
-
+                
                 // Your date picker / footer
                 TaskMainFooter(
                     selectedDate: $selectedDate,
@@ -116,5 +98,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MainView()
+        .environmentObject(TaskStore())
+        .environmentObject(GlobalTimeStore())
 }

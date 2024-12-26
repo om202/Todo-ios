@@ -11,9 +11,9 @@ class Task: Identifiable, Codable {
     let id: UUID
     let title: String
     let note: String
-    var date: Date
-    var time: Date?
-    var deadline: Date?
+    var date: Date // date for the task
+    var time: Date? // startTime
+    var deadline: Date? // endTime
     var isDone: Bool
 
     init(
