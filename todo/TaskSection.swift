@@ -3,7 +3,13 @@ import SwiftUI
 struct TaskSection: View {
     @StateObject private var taskStore = TaskStore()
     @State private var isDone: Bool
+    @State var currentTime: Date = Date()
     private let task: Task
+    
+    let timer =
+        Timer
+        .publish(every: 1, on: .main, in: .common)
+        .autoconnect()
     
     init(task: Task) {
         self.task = task
@@ -24,7 +30,7 @@ struct TaskSection: View {
                 }
                 
                 if let taskTime = task.time,
-                   Date() > taskTime && !isDone {
+                   currentTime > taskTime && !isDone {
                     TaskProgressView(task: task)
                 }
             }
@@ -38,6 +44,9 @@ struct TaskSection: View {
                 isDone.toggle()
                 taskStore.toggleTask(task)
             }
+        }
+        .onReceive(timer) { _ in
+            currentTime = Date()
         }
     }
 }
