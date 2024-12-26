@@ -2,11 +2,13 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var taskStore: TaskStore
+    @EnvironmentObject var taskDateStore: GlobalTaskDateStore
+
     @State private var editTask: Bool = false
-    @State private var selectedDate: Date = Date()
     @State var useImageBG: Bool = true
+    
     private var formattedDate: String {
-        FormatDate(date: selectedDate)
+        FormatDate(date: taskDateStore.TaskDate)
     }
 
     var body: some View {
@@ -19,7 +21,11 @@ struct MainView: View {
                             // 1) Filter tasks by selected date
                             let filteredTask = taskStore.tasks
                                 .filter {
-                                    Calendar.current.isDate($0.date, inSameDayAs: selectedDate)
+                                    Calendar.current
+                                        .isDate(
+                                            $0.date,
+                                            inSameDayAs: taskDateStore.TaskDate
+                                        )
                                 }
 
                             if filteredTask.isEmpty {
@@ -85,7 +91,6 @@ struct MainView: View {
                 
                 // Your date picker / footer
                 TaskMainFooter(
-                    selectedDate: $selectedDate,
                     editTask: $editTask,
                     formattedDate: formattedDate
                 )
@@ -101,4 +106,5 @@ struct MainView: View {
     MainView()
         .environmentObject(TaskStore())
         .environmentObject(GlobalTimeStore())
+        .environmentObject(GlobalTaskDateStore())
 }

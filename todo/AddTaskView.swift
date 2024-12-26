@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddTaskView: View {
     @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject var taskDateStore: GlobalTaskDateStore
     @ObservedObject var taskStore: TaskStore
 
     // :: Task Strings ::
@@ -16,7 +17,6 @@ struct AddTaskView: View {
     @State private var taskNote: String = ""
     // :: Date ::
     @State private var showDatePicker: Bool = false
-    @State private var selectedDate: Date = Date()
     // :: Time ::
     @State private var showTimePicker: Bool = false
     @State private var selectedTime: Date? = nil
@@ -66,7 +66,7 @@ struct AddTaskView: View {
                             HStack {
                                 Image(systemName: "calendar")
                                 Text(
-                                    selectedDate.formatted(
+                                    taskDateStore.TaskDate.formatted(
                                         date: .abbreviated, time: .omitted))
                             }
                             .foregroundColor(.gray)
@@ -80,7 +80,7 @@ struct AddTaskView: View {
                                         "Select Date", systemImage: "calendar")
                                     DatePicker(
                                         "",
-                                        selection: $selectedDate,
+                                        selection: $taskDateStore.TaskDate,
                                         in: Date()...,
                                         displayedComponents: [.date]
                                     )
@@ -199,7 +199,7 @@ struct AddTaskView: View {
                                 .addTask(
                                     title: taskTitle,
                                     note: taskNote,
-                                    date: zeroOutSeconds(from: selectedDate) ?? Date(),
+                                    date: zeroOutSeconds(from: taskDateStore.TaskDate) ?? Date(),
                                     time: zeroOutSeconds(from: selectedTime),
                                     deadline: zeroOutSeconds(from: selectedDeadline)
                                 )

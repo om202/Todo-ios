@@ -1,17 +1,17 @@
 import SwiftUI
 
 struct TaskMainFooter: View {
-    @Binding var selectedDate: Date
+    @EnvironmentObject var taskDateStore: GlobalTaskDateStore
     @Binding var editTask: Bool
-    @State private var isCalendarPresented: Bool = false  // State to toggle calendar presentation
+    @State private var isCalendarPresented: Bool = false
     let vibMed = UIImpactFeedbackGenerator(style: .medium)
     var formattedDate: String
 
     func addDays(_ days: Int) {
         if let newDate = Calendar.current.date(
-            byAdding: .day, value: days, to: selectedDate
+            byAdding: .day, value: days, to: taskDateStore.TaskDate
         ) {
-            selectedDate = newDate
+            taskDateStore.TaskDate = newDate
             vibMed.impactOccurred()
         }
     }
@@ -73,7 +73,7 @@ struct TaskMainFooter: View {
 
                     DatePicker(
                         "Select Date",
-                        selection: $selectedDate,
+                        selection: $taskDateStore.TaskDate,
                         displayedComponents: [.date]
                     )
                     .datePickerStyle(.graphical)
