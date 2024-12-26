@@ -61,7 +61,7 @@ private struct TaskContentView: View {
             Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
+                .frame(width: 16, height: 16)
                 .foregroundColor(.indigo)
 
             Text(task.title)
@@ -110,7 +110,7 @@ struct TaskUpperSectionView: View {
             Spacer()
             TimeDisplayView(task: task, isDone: isDone)
         }
-        .font(.subheadline)
+        .font(.footnote)
         .foregroundColor(.gray)
     }
 }
@@ -132,7 +132,7 @@ private struct TimeDisplayView: View {
 
     private var startTimeView: some View {
         HStack {
-            Image(systemName: "clock")
+            Image(systemName: "timer")
             Text(task.time?.formatted(.dateTime.hour().minute()) ?? "")
         }
     }
