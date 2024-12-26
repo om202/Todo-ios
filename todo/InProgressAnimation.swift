@@ -46,17 +46,15 @@ struct InProgressAnimation: View {
 
     private var timeDescription: String {
         if finishTime == nil {
-            return "No limit"
+            return "In Progress"
         }
 
         guard let finishTime = finishTime else { return "" }
 
         if currentTime > finishTime {
-            let passedTime = currentTime.timeIntervalSince(finishTime)
-            return "Past \(formatTimeInterval(passedTime))"
+            return "Missed Deadline"
         } else {
-            let remainingTime = finishTime.timeIntervalSince(currentTime)
-            return "\(formatTimeInterval(remainingTime)) left"
+            return "In Progress"
         }
     }
 

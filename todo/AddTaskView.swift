@@ -26,6 +26,16 @@ struct AddTaskView: View {
     // :: Keyboard Focus ::
     @FocusState private var showKeyboard: Bool
 
+    func zeroOutSeconds(from date: Date?) -> Date? {
+        guard let date = date else {
+            return nil
+        }
+        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
+                                                         from: date)
+        components.second = 0
+        return Calendar.current.date(from: components)
+    }
+
     var body: some View {
         NavigationView {
             Form {
@@ -189,9 +199,9 @@ struct AddTaskView: View {
                                 .addTask(
                                     title: taskTitle,
                                     note: taskNote,
-                                    date: selectedDate,
-                                    time: selectedTime,
-                                    deadline: selectedDeadline
+                                    date: zeroOutSeconds(from: selectedDate) ?? Date(),
+                                    time: zeroOutSeconds(from: selectedTime),
+                                    deadline: zeroOutSeconds(from: selectedDeadline)
                                 )
                             dismiss()
                         }) {

@@ -5,32 +5,33 @@ struct TaskSection: View {
     @State private var isDone: Bool
     @State var currentTime: Date = Date()
     private let task: Task
-    
+
     let timer =
         Timer
         .publish(every: 1, on: .main, in: .common)
         .autoconnect()
-    
+
     init(task: Task) {
         self.task = task
         self._isDone = State(initialValue: task.isDone)
     }
-    
+
     var body: some View {
         Section {
             VStack(alignment: .leading, spacing: 4) {
                 if task.time != nil && !isDone {
                     TaskUpperSectionView(task: task, isDone: $isDone)
                 }
-                
+
                 TaskContentView(task: task, isDone: $isDone)
-                
+
                 if !task.note.trimmingCharacters(in: .whitespaces).isEmpty {
                     TaskNoteView(note: task.note)
                 }
-                
+
                 if let taskTime = task.time,
-                   currentTime > taskTime && !isDone {
+                    currentTime > taskTime && !isDone
+                {
                     TaskProgressView(task: task)
                 }
             }
@@ -54,7 +55,7 @@ struct TaskSection: View {
 private struct TaskContentView: View {
     let task: Task
     @Binding var isDone: Bool
-    
+
     var body: some View {
         HStack {
             Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
@@ -62,7 +63,7 @@ private struct TaskContentView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24, height: 24)
                 .foregroundColor(.indigo)
-            
+
             Text(task.title)
                 .padding(.leading, 8)
         }
@@ -71,7 +72,7 @@ private struct TaskContentView: View {
 
 private struct TaskNoteView: View {
     let note: String
-    
+
     var body: some View {
         HStack {
             Image(systemName: "arrow.turn.down.right")
@@ -84,7 +85,7 @@ private struct TaskNoteView: View {
 
 private struct TaskProgressView: View {
     let task: Task
-    
+
     var body: some View {
         HStack {
             InProgressAnimation(
@@ -103,7 +104,7 @@ private struct TaskProgressView: View {
 struct TaskUpperSectionView: View {
     let task: Task
     @Binding var isDone: Bool
-    
+
     var body: some View {
         HStack {
             Spacer()
@@ -117,25 +118,25 @@ struct TaskUpperSectionView: View {
 private struct TimeDisplayView: View {
     let task: Task
     let isDone: Bool
-    
+
     var body: some View {
         HStack {
             startTimeView
-            
+
             if task.deadline != nil {
                 deadlineView
             }
         }
         .strikethrough(false)
     }
-    
+
     private var startTimeView: some View {
         HStack {
             Image(systemName: "clock")
             Text(task.time?.formatted(.dateTime.hour().minute()) ?? "")
         }
     }
-    
+
     private var deadlineView: some View {
         HStack {
             Image(systemName: "arrow.right")
