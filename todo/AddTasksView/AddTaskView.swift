@@ -139,6 +139,14 @@ struct AddTaskView: View {
                     if !filteredSuggestions.isEmpty {
                         VStack {
                             VStack(alignment: .leading) {
+                                HStack {
+                                    Spacer()
+                                    Button(action: {
+                                        filteredSuggestions = []
+                                    }) {
+                                        Image(systemName: "xmark")
+                                    }
+                                }.padding(.vertical, 8)
                                 // Scrollable Suggestions
                                 ScrollView {
                                     VStack(spacing: 8) {

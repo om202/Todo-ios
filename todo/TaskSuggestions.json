@@ -1,55 +1,55 @@
 [
     {
         "id": 0,
-        "todo": "Meditate for 10 minutes"
+        "todo": "Buy groceries"
     },
     {
         "id": 1,
-        "todo": "Schedule a doctor appointment"
+        "todo": "Pay utility bills"
     },
     {
         "id": 2,
-        "todo": "Pay the electricity bill"
-    },
-    {
-        "id": 3,
         "todo": "Do the laundry"
     },
     {
-        "id": 4,
+        "id": 3,
         "todo": "Clean the kitchen"
     },
     {
+        "id": 4,
+        "todo": "Vacuum the house"
+    },
+    {
         "id": 5,
-        "todo": "Cook dinner"
+        "todo": "Take out the trash"
     },
     {
         "id": 6,
-        "todo": "Go for a 30-minute run"
+        "todo": "Wash the dishes"
     },
     {
         "id": 7,
-        "todo": "Make a call to a family member"
+        "todo": "Meal prep"
     },
     {
         "id": 8,
-        "todo": "Attend a team meeting"
+        "todo": "Go for a run or walk"
     },
     {
         "id": 9,
-        "todo": "Submit the project report"
-    },
-    {
-        "id": 10,
         "todo": "Reply to work emails"
     },
     {
+        "id": 10,
+        "todo": "Attend a scheduled meeting"
+    },
+    {
         "id": 11,
-        "todo": "Walk the dog"
+        "todo": "Call or text family members"
     },
     {
         "id": 12,
-        "todo": "Water the indoor plants"
+        "todo": "Schedule a doctor’s appointment"
     },
     {
         "id": 13,
@@ -57,1146 +57,546 @@
     },
     {
         "id": 14,
-        "todo": "Renew the car insurance"
+        "todo": "Renew car insurance"
     },
     {
         "id": 15,
-        "todo": "Buy a birthday gift for a friend"
-    },
-    {
-        "id": 16,
-        "todo": "Review the quarterly report"
-    },
-    {
-        "id": 17,
-        "todo": "Organize files on the computer"
-    },
-    {
-        "id": 18,
-        "todo": "Backup photos to cloud storage"
-    },
-    {
-        "id": 19,
-        "todo": "Update phone software"
-    },
-    {
-        "id": 20,
         "todo": "Fill the car with gas"
     },
     {
+        "id": 16,
+        "todo": "Declutter a room"
+    },
+    {
+        "id": 17,
+        "todo": "Pay the credit card bill"
+    },
+    {
+        "id": 18,
+        "todo": "Plan weekly meals"
+    },
+    {
+        "id": 19,
+        "todo": "Water the plants"
+    },
+    {
+        "id": 20,
+        "todo": "Walk the dog"
+    },
+    {
         "id": 21,
-        "todo": "Read a chapter of a book"
+        "todo": "Write a new to-do list"
     },
     {
         "id": 22,
-        "todo": "Practice violin"
+        "todo": "Take vitamins or medicine"
     },
     {
         "id": 23,
-        "todo": "Take the prescribed medicine"
+        "todo": "Meditate for 10 minutes"
     },
     {
         "id": 24,
-        "todo": "Prepare slides for a presentation"
+        "todo": "Review monthly finances"
     },
     {
         "id": 25,
-        "todo": "Research new laptops to buy"
+        "todo": "Check personal emails"
     },
     {
         "id": 26,
-        "todo": "Donate old clothes to charity"
+        "todo": "Clean the bathroom"
     },
     {
         "id": 27,
-        "todo": "Book movie tickets for the weekend"
+        "todo": "Change the bed linens"
     },
     {
         "id": 28,
-        "todo": "Plan a weekend trip itinerary"
+        "todo": "Organize the mailbox"
     },
     {
         "id": 29,
-        "todo": "Fix a leaky faucet"
+        "todo": "Send mail or packages"
     },
     {
         "id": 30,
-        "todo": "Spend an hour playing with the kids"
+        "todo": "Update phone software"
     },
     {
         "id": 31,
-        "todo": "Post a new photo on social media"
+        "todo": "Backup important files"
     },
     {
         "id": 32,
-        "todo": "Schedule a car service appointment"
+        "todo": "Plan a social outing"
     },
     {
         "id": 33,
-        "todo": "Go grocery shopping"
-    },
-    {
-        "id": 34,
-        "todo": "Prepare a shopping list"
-    },
-    {
-        "id": 35,
-        "todo": "Bake cookies"
-    },
-    {
-        "id": 36,
-        "todo": "Attend a webinar"
-    },
-    {
-        "id": 37,
-        "todo": "Organize the pantry"
-    },
-    {
-        "id": 38,
-        "todo": "Repair the bike tire"
-    },
-    {
-        "id": 39,
-        "todo": "Take the dog to the vet"
-    },
-    {
-        "id": 40,
-        "todo": "Plan meals for the week"
-    },
-    {
-        "id": 41,
-        "todo": "Buy new running shoes"
-    },
-    {
-        "id": 42,
-        "todo": "Call to check on a friend"
-    },
-    {
-        "id": 43,
-        "todo": "Write a blog post"
-    },
-    {
-        "id": 44,
-        "todo": "Test a new recipe"
-    },
-    {
-        "id": 45,
-        "todo": "Clean the windows"
-    },
-    {
-        "id": 46,
-        "todo": "Organize the bookshelf"
-    },
-    {
-        "id": 47,
-        "todo": "Water the garden"
-    },
-    {
-        "id": 48,
-        "todo": "Watch a documentary"
-    },
-    {
-        "id": 49,
-        "todo": "Paint the bedroom walls"
-    },
-    {
-        "id": 50,
-        "todo": "Learn a new language for 30 minutes"
-    },
-    {
-        "id": 51,
-        "todo": "Write in a journal"
-    },
-    {
-        "id": 52,
-        "todo": "Practice yoga"
-    },
-    {
-        "id": 53,
-        "todo": "Declutter the wardrobe"
-    },
-    {
-        "id": 54,
-        "todo": "Fix the broken chair"
-    },
-    {
-        "id": 55,
-        "todo": "Plan a surprise dinner"
-    },
-    {
-        "id": 56,
-        "todo": "Take a car for an oil change"
-    },
-    {
-        "id": 57,
-        "todo": "Update the resume"
-    },
-    {
-        "id": 58,
-        "todo": "Set up a budget for the month"
-    },
-    {
-        "id": 59,
-        "todo": "Shop for school supplies"
-    },
-    {
-        "id": 60,
-        "todo": "Write thank-you notes"
-    },
-    {
-        "id": 61,
-        "todo": "Rearrange furniture in the living room"
-    },
-    {
-        "id": 62,
-        "todo": "Wash the car"
-    },
-    {
-        "id": 63,
-        "todo": "Sort old photographs"
-    },
-    {
-        "id": 64,
-        "todo": "Make a dentist appointment for cleaning"
-    },
-    {
-        "id": 65,
-        "todo": "Call the bank for account updates"
-    },
-    {
-        "id": 66,
-        "todo": "Research holiday destinations"
-    },
-    {
-        "id": 67,
-        "todo": "Set up a workout routine"
-    },
-    {
-        "id": 68,
-        "todo": "Buy a new phone charger"
-    },
-    {
-        "id": 69,
-        "todo": "Plan a family game night"
-    },
-    {
-        "id": 70,
-        "todo": "Check credit card statements"
-    },
-    {
-        "id": 71,
-        "todo": "Replace batteries in the remote control"
-    },
-    {
-        "id": 72,
-        "todo": "Make a photo album"
-    },
-    {
-        "id": 73,
-        "todo": "Research a new hobby"
-    },
-    {
-        "id": 74,
-        "todo": "Create a vision board"
-    },
-    {
-        "id": 75,
-        "todo": "Install a new app on the phone"
-    },
-    {
-        "id": 76,
-        "todo": "Repair a loose doorknob"
-    },
-    {
-        "id": 77,
-        "todo": "Replace a light bulb in the hallway"
-    },
-    {
-        "id": 78,
-        "todo": "Plan a picnic at the park"
-    },
-    {
-        "id": 79,
-        "todo": "Organize cables and chargers"
-    },
-    {
-        "id": 80,
-        "todo": "Check the smoke detectors"
-    },
-    {
-        "id": 81,
-        "todo": "Create a playlist for workouts"
-    },
-    {
-        "id": 82,
-        "todo": "Volunteer at a local charity"
-    },
-    {
-        "id": 83,
-        "todo": "Buy ingredients for baking a cake"
-    },
-    {
-        "id": 84,
-        "todo": "Trim the bushes in the yard"
-    },
-    {
-        "id": 85,
-        "todo": "Write a cover letter for a job application"
-    },
-    {
-        "id": 86,
-        "todo": "Set up a recurring alarm"
-    },
-    {
-        "id": 87,
-        "todo": "Create a backup of important documents"
-    },
-    {
-        "id": 88,
-        "todo": "Shop for a new pair of sneakers"
-    },
-    {
-        "id": 89,
-        "todo": "Plan the monthly grocery budget"
-    },
-    {
-        "id": 90,
-        "todo": "Book a table at a restaurant"
-    },
-    {
-        "id": 91,
         "todo": "Clean the refrigerator"
     },
     {
-        "id": 92,
-        "todo": "Label storage boxes in the garage"
+        "id": 34,
+        "todo": "Make a shopping list"
     },
     {
-        "id": 93,
-        "todo": "Change the bedsheets"
+        "id": 35,
+        "todo": "Go to the gym"
     },
     {
-        "id": 94,
-        "todo": "Install updates on the laptop"
+        "id": 36,
+        "todo": "Call customer service"
     },
     {
-        "id": 95,
-        "todo": "Buy a thank-you card"
+        "id": 37,
+        "todo": "Buy household essentials"
     },
     {
-        "id": 96,
-        "todo": "Watch an educational video online"
+        "id": 38,
+        "todo": "Read a chapter of a book"
     },
     {
-        "id": 97,
-        "todo": "Make a list of goals for the month"
+        "id": 39,
+        "todo": "Plan weekend activities"
     },
     {
-        "id": 98,
-        "todo": "Create a packing list for a trip"
+        "id": 40,
+        "todo": "Sort junk mail"
     },
     {
-        "id": 99,
-        "todo": "Check the weather forecast for the weekend"
+        "id": 41,
+        "todo": "Check car tire pressure"
     },
     {
-        "id": 100,
-        "todo": "Buy a gift card for a colleague"
+        "id": 42,
+        "todo": "Label storage boxes"
     },
     {
-        "id": 101,
-        "todo": "Plan a surprise party"
+        "id": 43,
+        "todo": "Schedule a haircut"
     },
     {
-        "id": 102,
-        "todo": "Check the car tire pressure"
+        "id": 44,
+        "todo": "Reply to personal messages"
     },
     {
-        "id": 103,
-        "todo": "Organize the junk drawer"
+        "id": 45,
+        "todo": "Pack lunch"
     },
     {
-        "id": 104,
-        "todo": "Set up a savings plan"
+        "id": 46,
+        "todo": "Refill prescriptions"
     },
     {
-        "id": 105,
-        "todo": "Wash the bathroom mirrors"
+        "id": 47,
+        "todo": "Charge devices"
     },
     {
-        "id": 106,
-        "todo": "Learn a new recipe"
+        "id": 48,
+        "todo": "Set aside clothes for donation"
     },
     {
-        "id": 107,
-        "todo": "Call customer support for a product inquiry"
+        "id": 49,
+        "todo": "Take a self-care break"
     },
     {
-        "id": 108,
-        "todo": "Update passwords for online accounts"
+        "id": 50,
+        "todo": "Organize your workspace"
     },
     {
-        "id": 109,
-        "todo": "Defrost the freezer"
+        "id": 51,
+        "todo": "Update your resume or LinkedIn profile"
     },
     {
-        "id": 110,
-        "todo": "Reorganize the shoe rack"
-    },
-    {
-        "id": 111,
-        "todo": "Check the mailbox for packages"
-    },
-    {
-        "id": 112,
-        "todo": "Order groceries for delivery"
-    },
-    {
-        "id": 113,
-        "todo": "Schedule a video call with friends"
-    },
-    {
-        "id": 114,
-        "todo": "Clean the coffee maker"
-    },
-    {
-        "id": 115,
-        "todo": "Order a new book online"
-    },
-    {
-        "id": 116,
-        "todo": "Try a new workout video"
-    },
-    {
-        "id": 117,
-        "todo": "Make a list of movies to watch"
-    },
-    {
-        "id": 118,
+        "id": 52,
         "todo": "Take out the recycling"
     },
     {
-        "id": 119,
-        "todo": "Pack a lunch for work"
+        "id": 53,
+        "todo": "Pay the rent or mortgage"
     },
     {
-        "id": 120,
-        "todo": "Refill the water filter"
+        "id": 54,
+        "todo": "Schedule a meeting with your manager"
     },
     {
-        "id": 121,
-        "todo": "Organize tax documents"
+        "id": 55,
+        "todo": "Pick up dry cleaning"
     },
     {
-        "id": 122,
-        "todo": "Take a walk in the park"
+        "id": 56,
+        "todo": "Check your credit score"
     },
     {
-        "id": 123,
-        "todo": "Replace old pillows"
+        "id": 57,
+        "todo": "Sign up for a new course or workshop"
     },
     {
-        "id": 124,
-        "todo": "Dust the ceiling fans"
+        "id": 58,
+        "todo": "Plan a date night"
     },
     {
-        "id": 125,
-        "todo": "Write a to-do list for tomorrow"
+        "id": 59,
+        "todo": "Research a new recipe"
     },
     {
-        "id": 126,
-        "todo": "Buy supplies for a school project"
+        "id": 60,
+        "todo": "Clean the living room"
     },
     {
-        "id": 127,
-        "todo": "Send a thank-you email"
+        "id": 61,
+        "todo": "Water the lawn or garden"
     },
     {
-        "id": 128,
-        "todo": "Update the family calendar"
+        "id": 62,
+        "todo": "Take the dog to the vet"
     },
     {
-        "id": 129,
-        "todo": "Create a meal prep schedule"
+        "id": 63,
+        "todo": "Schedule a car service"
     },
     {
-        "id": 130,
-        "todo": "Test the smoke alarms"
+        "id": 64,
+        "todo": "Create or update an emergency contact list"
     },
     {
-        "id": 131,
-        "todo": "Buy a houseplant for the living room"
+        "id": 65,
+        "todo": "Plan a family outing"
     },
     {
-        "id": 132,
-        "todo": "Take the trash to the curb"
+        "id": 66,
+        "todo": "Sort out monthly subscriptions"
     },
     {
-        "id": 133,
-        "todo": "Download a productivity app"
+        "id": 67,
+        "todo": "Plan a holiday or short vacation"
     },
     {
-        "id": 134,
-        "todo": "Organize the spice rack"
+        "id": 68,
+        "todo": "Wash the car"
     },
     {
-        "id": 135,
-        "todo": "Replace worn-out socks"
+        "id": 69,
+        "todo": "Replace light bulbs around the house"
     },
     {
-        "id": 136,
-        "todo": "Learn how to tie a new knot"
+        "id": 70,
+        "todo": "Prepare coffee or tea for the next morning"
     },
     {
-        "id": 137,
-        "todo": "Clean out the car trunk"
+        "id": 71,
+        "todo": "Write a thank-you note"
     },
     {
-        "id": 138,
-        "todo": "Prepare snacks for a road trip"
+        "id": 72,
+        "todo": "Buy stamps or envelopes"
     },
     {
-        "id": 139,
-        "todo": "Write a letter to a relative"
+        "id": 73,
+        "todo": "Organize the closet or wardrobe"
     },
     {
-        "id": 140,
-        "todo": "Organize digital photos"
+        "id": 74,
+        "todo": "Charge portable devices or power banks"
     },
     {
-        "id": 141,
-        "todo": "Watch a motivational video"
+        "id": 75,
+        "todo": "Invite friends for a get-together"
     },
     {
-        "id": 142,
-        "todo": "Create a financial goal tracker"
+        "id": 76,
+        "todo": "Fix a squeaky door or broken item"
     },
     {
-        "id": 143,
-        "todo": "Check upcoming subscription renewals"
+        "id": 77,
+        "todo": "Update your computer's operating system"
     },
     {
-        "id": 144,
-        "todo": "Plan a family outing for the weekend"
+        "id": 78,
+        "todo": "Sort photos on your phone"
     },
     {
-        "id": 145,
-        "todo": "Write a shopping list for hardware store"
+        "id": 79,
+        "todo": "Clean door handles and light switches"
     },
     {
-        "id": 146,
-        "todo": "Send a reminder for a meeting"
+        "id": 80,
+        "todo": "Check for upcoming deadlines or bills"
     },
     {
-        "id": 147,
-        "todo": "Organize the home office desk"
+        "id": 81,
+        "todo": "Donate old toys or books"
     },
     {
-        "id": 148,
-        "todo": "Test new features on a gadget"
+        "id": 82,
+        "todo": "Plan a parent-teacher meeting"
     },
     {
-        "id": 149,
-        "todo": "Sign up for an online course"
+        "id": 83,
+        "todo": "Learn a new skill or hobby"
     },
     {
-        "id": 150,
-        "todo": "Schedule a day for car washing"
+        "id": 84,
+        "todo": "Organize digital files"
     },
     {
-        "id": 151,
-        "todo": "Sharpen kitchen knives"
+        "id": 85,
+        "todo": "Check the weather forecast for the week"
     },
     {
-        "id": 152,
-        "todo": "Replace expired pantry items"
+        "id": 86,
+        "todo": "Clear out the spam folder"
     },
     {
-        "id": 153,
-        "todo": "Clean the washing machine filter"
+        "id": 87,
+        "todo": "Watch an educational video"
     },
     {
-        "id": 154,
-        "todo": "Test the flashlight batteries"
+        "id": 88,
+        "todo": "Schedule a coffee break with a colleague"
     },
     {
-        "id": 155,
-        "todo": "Rearrange photos on the wall"
+        "id": 89,
+        "todo": "Write down personal goals"
     },
     {
-        "id": 156,
-        "todo": "Create a packing list for a business trip"
+        "id": 90,
+        "todo": "Sign up for a gym membership"
     },
     {
-        "id": 157,
-        "todo": "Research local events for the weekend"
+        "id": 91,
+        "todo": "Organize your phone apps"
     },
     {
-        "id": 158,
-        "todo": "Buy ink for the printer"
+        "id": 92,
+        "todo": "Plan a picnic"
     },
     {
-        "id": 159,
-        "todo": "Update emergency contact information"
+        "id": 93,
+        "todo": "Buy or upgrade a phone charger"
     },
     {
-        "id": 160,
-        "todo": "Donate books you no longer need"
+        "id": 94,
+        "todo": "Sort out personal finances"
     },
     {
-        "id": 161,
-        "todo": "Plan a potluck dinner"
+        "id": 95,
+        "todo": "Clean your desk drawer"
     },
     {
-        "id": 162,
-        "todo": "Fix a squeaky door hinge"
+        "id": 96,
+        "todo": "Plan a family movie night"
     },
     {
-        "id": 163,
-        "todo": "Sign up for a local fitness class"
+        "id": 97,
+        "todo": "Find a new podcast to listen to"
     },
     {
-        "id": 164,
-        "todo": "Organize holiday decorations"
+        "id": 98,
+        "todo": "Donate extra blankets or clothing"
     },
     {
-        "id": 165,
-        "todo": "Replace air filters in the house"
+        "id": 99,
+        "todo": "Research a new streaming service"
     },
     {
-        "id": 166,
-        "todo": "Clean out the attic"
+        "id": 100,
+        "todo": "Check your bank balance"
     },
     {
-        "id": 167,
-        "todo": "Plan a DIY home project"
+        "id": 101,
+        "todo": "Set up automatic bill payments"
     },
     {
-        "id": 168,
-        "todo": "Buy tickets for a concert"
+        "id": 102,
+        "todo": "Arrange a playdate for the kids"
     },
     {
-        "id": 169,
-        "todo": "Research nearby hiking trails"
+        "id": 103,
+        "todo": "Visit the post office"
     },
     {
-        "id": 170,
-        "todo": "Set up automatic payments for bills"
+        "id": 104,
+        "todo": "Organize pantry shelves"
     },
     {
-        "id": 171,
-        "todo": "Buy pet food"
-    },
-    {
-        "id": 172,
-        "todo": "Take the cat for a grooming session"
-    },
-    {
-        "id": 173,
-        "todo": "Fix the handle on a cabinet door"
-    },
-    {
-        "id": 174,
-        "todo": "Prepare a guest room for visitors"
-    },
-    {
-        "id": 175,
-        "todo": "Plan the week’s outfits"
-    },
-    {
-        "id": 176,
-        "todo": "Write a list of personal goals"
-    },
-    {
-        "id": 177,
-        "todo": "Check the garden for weeds"
-    },
-    {
-        "id": 178,
-        "todo": "Buy ingredients for a special dinner"
-    },
-    {
-        "id": 179,
-        "todo": "Organize receipts for tax purposes"
-    },
-    {
-        "id": 180,
+        "id": 105,
         "todo": "Prepare a first aid kit"
     },
     {
-        "id": 181,
-        "todo": "Learn to fold origami shapes"
+        "id": 106,
+        "todo": "Clean out expired items from the fridge"
     },
     {
-        "id": 182,
-        "todo": "Replace old kitchen towels"
+        "id": 107,
+        "todo": "Write a journal entry"
     },
     {
-        "id": 183,
-        "todo": "Research a new app for productivity"
+        "id": 108,
+        "todo": "Research holiday gifts"
     },
     {
-        "id": 184,
-        "todo": "Plan a surprise breakfast in bed"
+        "id": 109,
+        "todo": "Plan a road trip route"
     },
     {
-        "id": 185,
-        "todo": "Create a playlist for relaxation"
+        "id": 110,
+        "todo": "Create a backup of important documents"
     },
     {
-        "id": 186,
-        "todo": "Clean and organize the medicine cabinet"
+        "id": 111,
+        "todo": "Order groceries online"
     },
     {
-        "id": 187,
-        "todo": "Fix the zipper on a jacket"
+        "id": 112,
+        "todo": "Clean the microwave"
     },
     {
-        "id": 188,
-        "todo": "Organize the cleaning supplies closet"
+        "id": 113,
+        "todo": "Schedule a dentist appointment"
     },
     {
-        "id": 189,
-        "todo": "Install new curtains in the living room"
+        "id": 114,
+        "todo": "Buy birthday cards"
     },
     {
-        "id": 190,
-        "todo": "Buy a new mouse for the computer"
+        "id": 115,
+        "todo": "Organize your music library"
     },
     {
-        "id": 191,
-        "todo": "Test the internet speed"
+        "id": 116,
+        "todo": "Schedule a video call with friends"
     },
     {
-        "id": 192,
-        "todo": "Make a list of subscription services"
+        "id": 117,
+        "todo": "Clean and sanitize doorknobs"
     },
     {
-        "id": 193,
-        "todo": "Sort and recycle old magazines"
+        "id": 118,
+        "todo": "Plan a weekly exercise schedule"
     },
     {
-        "id": 194,
-        "todo": "Order custom labels for storage bins"
+        "id": 119,
+        "todo": "Rearrange furniture for a fresh look"
     },
     {
-        "id": 195,
-        "todo": "Watch an online tutorial"
+        "id": 120,
+        "todo": "Fix a loose cabinet handle"
     },
     {
-        "id": 196,
-        "todo": "Try a new journaling technique"
+        "id": 121,
+        "todo": "Replace old towels"
     },
     {
-        "id": 197,
-        "todo": "Call to confirm an upcoming appointment"
+        "id": 122,
+        "todo": "Buy or borrow a new book"
     },
     {
-        "id": 198,
-        "todo": "Clean the air vents in the house"
+        "id": 123,
+        "todo": "Check in with an elderly relative"
     },
     {
-        "id": 199,
-        "todo": "Plan a day of self-care"
+        "id": 124,
+        "todo": "Deep clean the bathroom tiles"
     },
     {
-        "id": 200,
-        "todo": "Set reminders for upcoming birthdays"
+        "id": 125,
+        "todo": "Research a new hobby or craft"
     },
     {
-        "id": 201,
-        "todo": "Polish leather shoes"
+        "id": 126,
+        "todo": "Plan a family board game night"
     },
     {
-        "id": 202,
-        "todo": "Plan a budget for holiday shopping"
+        "id": 127,
+        "todo": "Make an appointment for a routine checkup"
     },
     {
-        "id": 203,
-        "todo": "Wash and fold bed linens"
+        "id": 128,
+        "todo": "Review your insurance policies"
     },
     {
-        "id": 204,
-        "todo": "Buy batteries for household devices"
+        "id": 129,
+        "todo": "Pack a healthy lunch for work"
     },
     {
-        "id": 205,
-        "todo": "Inspect windows for drafts"
+        "id": 130,
+        "todo": "Organize computer cables"
     },
     {
-        "id": 206,
-        "todo": "Research recipes for healthy snacks"
+        "id": 131,
+        "todo": "Check your car’s oil level"
     },
     {
-        "id": 207,
-        "todo": "Test a new meditation app"
+        "id": 132,
+        "todo": "Update contact list on your phone"
     },
     {
-        "id": 208,
-        "todo": "Clean out expired medicine"
+        "id": 133,
+        "todo": "Look for online discounts or coupons"
     },
     {
-        "id": 209,
-        "todo": "Organize a virtual game night"
+        "id": 134,
+        "todo": "Clean your keyboard and mouse"
     },
     {
-        "id": 210,
-        "todo": "Take the car for an emissions test"
+        "id": 135,
+        "todo": "Share a recipe with a friend"
     },
     {
-        "id": 211,
-        "todo": "Organize music playlists"
+        "id": 136,
+        "todo": "Organize your purse or wallet"
     },
     {
-        "id": 212,
-        "todo": "Buy a case for a new phone"
+        "id": 137,
+        "todo": "Check smoke alarms"
     },
     {
-        "id": 213,
-        "todo": "Label containers in the fridge"
+        "id": 138,
+        "todo": "Refill your water bottle regularly"
     },
     {
-        "id": 214,
-        "todo": "Hang framed pictures on the wall"
+        "id": 139,
+        "todo": "Schedule a day off for personal errands"
     },
     {
-        "id": 215,
-        "todo": "Replace the shower curtain liner"
+        "id": 140,
+        "todo": "Shop for new bed linens"
     },
     {
-        "id": 216,
-        "todo": "Set up automatic savings transfers"
+        "id": 141,
+        "todo": "Update apps on your phone"
     },
     {
-        "id": 217,
-        "todo": "Organize travel-sized toiletries"
+        "id": 142,
+        "todo": "Sort mail into keep, shred, or recycle"
     },
     {
-        "id": 218,
-        "todo": "Check for online discounts before shopping"
+        "id": 143,
+        "todo": "Clean your coffee maker"
     },
     {
-        "id": 219,
-        "todo": "Test all light switches in the house"
+        "id": 144,
+        "todo": "Plan a meal with leftovers in mind"
     },
     {
-        "id": 220,
-        "todo": "Create a playlist for a road trip"
+        "id": 145,
+        "todo": "Hang new photos or artwork"
     },
     {
-        "id": 221,
-        "todo": "Organize the tool box"
+        "id": 146,
+        "todo": "Dust window blinds"
     },
     {
-        "id": 222,
-        "todo": "Buy extra storage bins"
+        "id": 147,
+        "todo": "Pay any outstanding parking tickets"
     },
     {
-        "id": 223,
-        "todo": "Research home improvement projects"
+        "id": 148,
+        "todo": "Plan next month’s budget"
     },
     {
-        "id": 224,
-        "todo": "Take the kids to a park"
-    },
-    {
-        "id": 225,
-        "todo": "Learn how to bake bread"
-    },
-    {
-        "id": 226,
-        "todo": "Check the garden for pests"
-    },
-    {
-        "id": 227,
-        "todo": "Buy a weekly planner"
-    },
-    {
-        "id": 228,
-        "todo": "Organize tax-related documents"
-    },
-    {
-        "id": 229,
-        "todo": "Buy a water bottle for daily use"
-    },
-    {
-        "id": 230,
-        "todo": "Schedule a day off for relaxation"
-    },
-    {
-        "id": 231,
-        "todo": "Research new phone plans"
-    },
-    {
-        "id": 232,
-        "todo": "Reorganize the laundry area"
-    },
-    {
-        "id": 233,
-        "todo": "Install a shelf in the garage"
-    },
-    {
-        "id": 234,
-        "todo": "Clean out old tools from the shed"
-    },
-    {
-        "id": 235,
-        "todo": "Set goals for the next month"
-    },
-    {
-        "id": 236,
-        "todo": "Create a workout schedule for the week"
-    },
-    {
-        "id": 237,
-        "todo": "Take the vacuum cleaner for maintenance"
-    },
-    {
-        "id": 238,
-        "todo": "Organize bookmarks in your browser"
-    },
-    {
-        "id": 239,
-        "todo": "Check for product warranties"
-    },
-    {
-        "id": 240,
-        "todo": "Declutter the basement"
-    },
-    {
-        "id": 241,
-        "todo": "Plan a day hike"
-    },
-    {
-        "id": 242,
-        "todo": "Refill the first aid kit"
-    },
-    {
-        "id": 243,
-        "todo": "Install energy-efficient light bulbs"
-    },
-    {
-        "id": 244,
-        "todo": "Organize the home entertainment system"
-    },
-    {
-        "id": 245,
-        "todo": "Buy a coffee table book"
-    },
-    {
-        "id": 246,
-        "todo": "Reorganize the dining room table"
-    },
-    {
-        "id": 247,
-        "todo": "Plan a weekend road trip"
-    },
-    {
-        "id": 248,
-        "todo": "Sort and file user manuals"
-    },
-    {
-        "id": 249,
-        "todo": "Check if appliances need repairs"
-    },
-    {
-        "id": 250,
-        "todo": "Volunteer at a local shelter"
-    },
-    {
-        "id": 251,
-        "todo": "Plan a picnic in the park"
-    },
-    {
-        "id": 252,
-        "todo": "Update antivirus software on the computer"
-    },
-    {
-        "id": 253,
-        "todo": "Sign up for a cooking class"
-    },
-    {
-        "id": 254,
-        "todo": "Take the dog for a grooming session"
-    },
-    {
-        "id": 255,
-        "todo": "Organize recipes into a digital folder"
-    },
-    {
-        "id": 256,
-        "todo": "Set up a new password manager"
-    },
-    {
-        "id": 257,
-        "todo": "Schedule a dentist appointment for cleaning"
-    },
-    {
-        "id": 258,
-        "todo": "Repair the broken fence in the backyard"
-    },
-    {
-        "id": 259,
-        "todo": "Create a vision board for next year"
-    },
-    {
-        "id": 260,
-        "todo": "Start a small vegetable garden"
-    },
-    {
-        "id": 261,
-        "todo": "Plan a game night with friends"
-    },
-    {
-        "id": 262,
-        "todo": "Research new hiking gear"
-    },
-    {
-        "id": 263,
-        "todo": "Organize the closet for winter clothes"
-    },
-    {
-        "id": 264,
-        "todo": "Paint a room in the house"
-    },
-    {
-        "id": 265,
-        "todo": "Fix the loose tiles in the bathroom"
-    },
-    {
-        "id": 266,
-        "todo": "Watch an online course about personal finance"
-    },
-    {
-        "id": 267,
-        "todo": "Write a letter to a friend abroad"
-    },
-    {
-        "id": 268,
-        "todo": "Install new apps for productivity"
-    },
-    {
-        "id": 269,
-        "todo": "Check local events for family activities"
-    },
-    {
-        "id": 270,
-        "todo": "Book tickets for a zoo visit"
-    },
-    {
-        "id": 271,
-        "todo": "Create a monthly savings goal"
-    },
-    {
-        "id": 272,
-        "todo": "Clean and wax the car"
-    },
-    {
-        "id": 273,
-        "todo": "Start a gratitude journal"
-    },
-    {
-        "id": 274,
-        "todo": "Organize camping gear"
-    },
-    {
-        "id": 275,
-        "todo": "Fix the squeaky hinges on the bedroom door"
-    },
-    {
-        "id": 276,
-        "todo": "Plan a surprise breakfast date"
-    },
-    {
-        "id": 277,
-        "todo": "Schedule a pet training session"
-    },
-    {
-        "id": 278,
-        "todo": "Update the family emergency contact list"
-    },
-    {
-        "id": 279,
-        "todo": "Organize books by genre on the shelf"
-    },
-    {
-        "id": 280,
-        "todo": "Sign up for a yoga retreat"
-    },
-    {
-        "id": 281,
-        "todo": "Replace the doormat at the front door"
-    },
-    {
-        "id": 282,
-        "todo": "Research budget travel tips"
-    },
-    {
-        "id": 283,
-        "todo": "Organize digital photos into albums"
-    },
-    {
-        "id": 284,
-        "todo": "Learn a new photography technique"
-    },
-    {
-        "id": 285,
-        "todo": "Update the insurance policy information"
-    },
-    {
-        "id": 286,
-        "todo": "Plan a DIY craft project"
-    },
-    {
-        "id": 287,
-        "todo": "Install shelving in the storage room"
-    },
-    {
-        "id": 288,
-        "todo": "Donate unused tech gadgets"
-    },
-    {
-        "id": 289,
-        "todo": "Sign up for a volunteer activity"
-    },
-    {
-        "id": 290,
-        "todo": "Research eco-friendly home solutions"
-    },
-    {
-        "id": 291,
-        "todo": "Organize a weekend barbecue with neighbors"
-    },
-    {
-        "id": 292,
-        "todo": "Plan a visit to a local museum"
-    },
-    {
-        "id": 293,
-        "todo": "Take the bike for maintenance"
-    },
-    {
-        "id": 294,
-        "todo": "Buy plants to decorate the office desk"
-    },
-    {
-        "id": 295,
-        "todo": "Organize a donation drive at work"
-    },
-    {
-        "id": 296,
-        "todo": "Create a meal plan for the week"
-    },
-    {
-        "id": 297,
-        "todo": "Clean the gutters around the house"
-    },
-    {
-        "id": 298,
-        "todo": "Organize kitchen drawers and cabinets"
-    },
-    {
-        "id": 299,
-        "todo": "Set up a recurring donation to a charity"
+        "id": 149,
+        "todo": "Research local charity events"
     }
 ]
