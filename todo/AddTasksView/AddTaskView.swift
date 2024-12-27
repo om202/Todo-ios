@@ -19,7 +19,7 @@ struct AddTaskView: View {
     @State private var showDeadlinePicker: Bool = false
     @State private var selectedDeadline: Date? = nil
 
-    @FocusState private var showKeyboard: Bool
+    @FocusState private var isTitleFocused: Bool
 
     var body: some View {
         NavigationView {
@@ -41,7 +41,7 @@ struct AddTaskView: View {
                                 
                                 HStack {
                                     TextField("I want to ...", text: $taskTitle)
-                                        .focused($showKeyboard)
+                                        .focused($isTitleFocused)
                                         .onChange(of: taskTitle) { newValue in
                                             guard newValue.count > 2 else {
                                                 filteredSuggestions = []
@@ -49,7 +49,8 @@ struct AddTaskView: View {
                                             }
                                             if !isSelectingSuggestion {
                                                 filteredSuggestions = suggestions.filter {
-                                                    $0.lowercased().contains(newValue.lowercased())
+                                                    $0.lowercased()
+                                                        .contains(newValue.lowercased())
                                                 }
                                             }
                                         }
@@ -93,7 +94,8 @@ struct AddTaskView: View {
                                         Text(
                                             taskDateStore.TaskDate.formatted(
                                                 date: .abbreviated,
-                                                time: .omitted)
+                                                time: .omitted
+                                            )
                                         )
                                     }
                                     .foregroundColor(.gray)
@@ -144,12 +146,14 @@ struct AddTaskView: View {
                                     deadline: ZeroOutSeconds(from: selectedDeadline)
                                 )
                                 dismiss()
-                            } label: {
+                            }
+                            label: {
                                 HStack {
                                     Image(systemName: "circle.fill")
                                     Text("Let's do it!")
                                 }
                                 .font(.headline)
+                                .padding(8)
                             }
                             .buttonStyle(.borderedProminent)
                             .tint(.indigo)
@@ -157,7 +161,8 @@ struct AddTaskView: View {
                     }
                     .scrollContentBackground(.hidden)
 
-                    if !filteredSuggestions.isEmpty {
+                    // Only show overlay if we have suggestions AND the title field is focused
+                    if !filteredSuggestions.isEmpty && isTitleFocused {
                         suggestionsOverlay
                     }
                 }
@@ -178,7 +183,6 @@ struct AddTaskView: View {
             }
         }
         .onAppear {
-            showKeyboard = true
             loadSuggestions()
         }
         .sheet(isPresented: $showDatePicker) {
@@ -306,9 +310,12 @@ struct AddTaskView: View {
     }
 
     private func loadSuggestions() {
-        if let url = Bundle.main.url(forResource: "TaskSuggestions", withExtension: "json"),
-           let data = try? Data(contentsOf: url),
-           let decoded = try? JSONDecoder().decode([TaskSuggestion].self, from: data) {
+        if let url = Bundle.main.url(
+            forResource: "TaskSuggestions",
+            withExtension: "json"
+        ),
+        let data = try? Data(contentsOf: url),
+        let decoded = try? JSONDecoder().decode([TaskSuggestion].self, from: data) {
             suggestions = decoded.map { $0.todo }
         }
     }
