@@ -21,3 +21,13 @@ func FormatDate(date: Date) -> String {
         return formatter.string(from: date)
     }
 }
+
+func ZeroOutSeconds(from date: Date?) -> Date? {
+    guard let date = date else {
+        return nil
+    }
+    var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
+                                                     from: date)
+    components.second = 0
+    return Calendar.current.date(from: components)
+}

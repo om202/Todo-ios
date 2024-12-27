@@ -16,16 +16,10 @@ struct MainView: View {
             VStack {
                 HStack {
                     List {
-                        // Only proceed if there are tasks
                         if taskStore.tasks.count > 0 {
-                            // 1) Filter tasks by selected date
                             let filteredTask = taskStore.tasks
                                 .filter {
-                                    Calendar.current
-                                        .isDate(
-                                            $0.date,
-                                            inSameDayAs: taskDateStore.TaskDate
-                                        )
+                                    Calendar.current.isDate($0.date, inSameDayAs: taskDateStore.TaskDate)
                                 }
 
                             if filteredTask.isEmpty {
@@ -58,14 +52,31 @@ struct MainView: View {
                         }
                     }
                     .scrollContentBackground(.hidden)
+                    .background(
+                        useImageBG
+                            ? AnyView(
+                                Image("bg")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .edgesIgnoringSafeArea(.all)
+                              )
+                            : AnyView(
+                                LinearGradient(
+                                    gradient: Gradient(colors: [.purple, .indigo]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                              )
+                    )
+                    // Use .navigationBarLeading / .navigationBarTrailing for iOS 16 or earlier
                     .toolbar {
-                        ToolbarItem(placement: .topBarLeading) {
+                        ToolbarItem(placement: .navigationBarLeading) {
                             Text(formattedDate)
                                 .bold()
                                 .font(.title)
                         }
-                        ToolbarItem(placement: .topBarTrailing) {
-                            Button (action: {}) {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {}) {
                                 Image(systemName: "gear")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
@@ -75,28 +86,15 @@ struct MainView: View {
                             .foregroundColor(.primary)
                         }
                     }
-                    .background(
-                        useImageBG ?
-                        AnyView(Image("bg")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .edgesIgnoringSafeArea(.all)) :
-                        AnyView(LinearGradient(
-                            gradient: Gradient(colors: [Color.purple, Color.indigo]),
-                            startPoint: .top,
-                            endPoint: .bottom
-                        ))
-                    )
                 }
                 
-                // Your date picker / footer
                 TaskMainFooter(
                     editTask: $editTask,
                     formattedDate: formattedDate
                 )
             }
             .sheet(isPresented: $editTask) {
-                AddTaskView(taskStore: taskStore)
+                AddTaskView()
             }
         }
     }

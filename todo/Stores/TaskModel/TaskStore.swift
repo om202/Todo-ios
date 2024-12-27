@@ -14,7 +14,6 @@ class TaskStore: ObservableObject {
         }
     }
     private let tasksKey = "tasksKey"
-    let vibMed = UIImpactFeedbackGenerator(style: .medium)
     
     init() {
         loadTasksFromUserDefaults()
@@ -32,13 +31,13 @@ class TaskStore: ObservableObject {
             deadline: deadline
         )
         tasks.append(newTask)
-        vibMed.impactOccurred()
+        HapticsManager.mediumImpact()
     }
     
 
     func toggleTask(_ task: Task) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            vibMed.impactOccurred()
+            HapticsManager.mediumImpact()
             let updatedTask = task
             updatedTask.isDone.toggle()
             tasks[index] = updatedTask
@@ -46,7 +45,7 @@ class TaskStore: ObservableObject {
     }
 
     func deleteTask(at offSet: IndexSet) {
-        vibMed.impactOccurred()
+        HapticsManager.mediumImpact()
         tasks.remove(atOffsets: offSet)
     }
 

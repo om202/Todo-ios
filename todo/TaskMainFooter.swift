@@ -4,7 +4,6 @@ struct TaskMainFooter: View {
     @EnvironmentObject var taskDateStore: GlobalTaskDateStore
     @Binding var editTask: Bool
     @State private var isCalendarPresented: Bool = false
-    let vibMed = UIImpactFeedbackGenerator(style: .medium)
     var formattedDate: String
 
     func addDays(_ days: Int) {
@@ -12,7 +11,7 @@ struct TaskMainFooter: View {
             byAdding: .day, value: days, to: taskDateStore.TaskDate
         ) {
             taskDateStore.TaskDate = newDate
-            vibMed.impactOccurred()
+            HapticsManager.mediumImpact()
         }
     }
 

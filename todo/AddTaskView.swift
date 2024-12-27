@@ -10,7 +10,7 @@ import SwiftUI
 struct AddTaskView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var taskDateStore: GlobalTaskDateStore
-    @ObservedObject var taskStore: TaskStore
+    @EnvironmentObject var taskStore: TaskStore
 
     // :: Task Strings ::
     @State private var taskTitle: String = ""
@@ -25,16 +25,6 @@ struct AddTaskView: View {
     @State private var selectedDeadline: Date? = nil
     // :: Keyboard Focus ::
     @FocusState private var showKeyboard: Bool
-
-    func zeroOutSeconds(from date: Date?) -> Date? {
-        guard let date = date else {
-            return nil
-        }
-        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute],
-                                                         from: date)
-        components.second = 0
-        return Calendar.current.date(from: components)
-    }
 
     var body: some View {
         NavigationView {
@@ -75,9 +65,8 @@ struct AddTaskView: View {
                         .padding(.trailing)
                         .sheet(isPresented: $showDatePicker) {
                             NavigationView {
-                                VStack(alignment: .center) {
-                                    Label(
-                                        "Select Date", systemImage: "calendar")
+                                VStack {
+                                    Label("Select Date", systemImage: "calendar")
                                     DatePicker(
                                         "",
                                         selection: $taskDateStore.TaskDate,
@@ -86,15 +75,12 @@ struct AddTaskView: View {
                                     )
                                     .datePickerStyle(.graphical)
                                     .padding()
-
                                     Spacer()
                                 }
-                                .navigationBarItems(
-                                    trailing: Button("Done") {
-                                        showDatePicker = false
-                                    })
+                                .navigationBarItems(trailing: Button("Done") {
+                                    showDatePicker = false
+                                })
                             }
-                            .frame(maxHeight: .infinity, alignment: .top)
                         }
 
                         // Clock - Choose Time
@@ -199,9 +185,9 @@ struct AddTaskView: View {
                                 .addTask(
                                     title: taskTitle,
                                     note: taskNote,
-                                    date: zeroOutSeconds(from: taskDateStore.TaskDate) ?? Date(),
-                                    time: zeroOutSeconds(from: selectedTime),
-                                    deadline: zeroOutSeconds(from: selectedDeadline)
+                                    date: ZeroOutSeconds(from: taskDateStore.TaskDate) ?? Date(),
+                                    time: ZeroOutSeconds(from: selectedTime),
+                                    deadline: ZeroOutSeconds(from: selectedDeadline)
                                 )
                             dismiss()
                         }) {
@@ -236,8 +222,4 @@ struct AddTaskView: View {
             showKeyboard = true
         }
     }
-}
-
-#Preview {
-    AddTaskView(taskStore: TaskStore())
 }
