@@ -42,7 +42,7 @@ struct AddTaskView: View {
                                 HStack {
                                     TextField("I want to ...", text: $taskTitle)
                                         .focused($isTitleFocused)
-                                        .onChange(of: taskTitle) { newValue in
+                                        .onChange(of: taskTitle) {oldValue, newValue in
                                             guard newValue.count > 2 else {
                                                 filteredSuggestions = []
                                                 return
