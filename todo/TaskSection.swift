@@ -15,7 +15,7 @@ struct TaskSection: View {
     var body: some View {
         Section {
             VStack(alignment: .leading, spacing: 4) {
-                if task.time != nil && !isDone {
+                if task.time != nil {
                     TaskUpperSectionView(task: task, isDone: $isDone)
                 }
 
@@ -54,7 +54,7 @@ private struct TaskContentView: View {
             Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 16, height: 16)
+                .frame(width: 20, height: 20)
                 .foregroundColor(.indigo)
 
             Text(task.title)
