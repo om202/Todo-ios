@@ -3,8 +3,6 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var taskStore: TaskStore
     @EnvironmentObject var taskDateStore: GlobalTaskDateStore
-
-    @State private var editTask: Bool = false
     @State var useImageBG: Bool = true
     
     private var formattedDate: String {
@@ -89,12 +87,8 @@ struct MainView: View {
                 }
                 
                 TaskMainFooter(
-                    editTask: $editTask,
                     formattedDate: formattedDate
                 )
-            }
-            .sheet(isPresented: $editTask) {
-                AddTaskView()
             }
         }
     }

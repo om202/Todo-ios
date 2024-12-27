@@ -2,8 +2,8 @@ import SwiftUI
 
 struct TaskMainFooter: View {
     @EnvironmentObject var taskDateStore: GlobalTaskDateStore
-    @Binding var editTask: Bool
     @State private var isCalendarPresented: Bool = false
+    @State private var editTask: Bool = false
     var formattedDate: String
 
     func addDays(_ days: Int) {
@@ -64,6 +64,9 @@ struct TaskMainFooter: View {
             .padding()
             .bold()
         }
+        .sheet(isPresented: $editTask) {
+            AddTaskView()
+        }
         // Calendar Modal
         .sheet(isPresented: $isCalendarPresented) {
             NavigationView {
@@ -73,6 +76,7 @@ struct TaskMainFooter: View {
                     DatePicker(
                         "Select Date",
                         selection: $taskDateStore.TaskDate,
+                        in: Date()...,
                         displayedComponents: [.date]
                     )
                     .datePickerStyle(.graphical)

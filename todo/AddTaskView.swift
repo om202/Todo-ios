@@ -63,25 +63,6 @@ struct AddTaskView: View {
                         }
                         .buttonStyle(.bordered)
                         .padding(.trailing)
-                        .sheet(isPresented: $showDatePicker) {
-                            NavigationView {
-                                VStack {
-                                    Label("Select Date", systemImage: "calendar")
-                                    DatePicker(
-                                        "",
-                                        selection: $taskDateStore.TaskDate,
-                                        in: Date()...,
-                                        displayedComponents: [.date]
-                                    )
-                                    .datePickerStyle(.graphical)
-                                    .padding()
-                                    Spacer()
-                                }
-                                .navigationBarItems(trailing: Button("Done") {
-                                    showDatePicker = false
-                                })
-                            }
-                        }
 
                         // Clock - Choose Time
                         Button(action: {
@@ -96,32 +77,6 @@ struct AddTaskView: View {
                             .foregroundColor(.gray)
                         }
                         .buttonStyle(.bordered)
-                        .sheet(isPresented: $showTimePicker) {
-                            NavigationView {
-                                VStack(alignment: .center) {
-                                    Label("Select Time", systemImage: "clock")
-                                    DatePicker(
-                                        "",
-                                        selection: Binding(
-                                            get: { selectedTime ?? Date() },
-                                            set: { selectedTime = $0 }
-                                        ),
-                                        in: Date()...,
-                                        displayedComponents: [.hourAndMinute]
-                                    )
-                                    .datePickerStyle(.wheel)
-                                    .padding()
-                                    .labelsHidden()
-
-                                    Spacer()
-                                }
-                                .navigationBarItems(
-                                    trailing: Button("Done") {
-                                        showTimePicker = false
-                                    })
-                            }
-                            .frame(maxHeight: .infinity, alignment: .top)
-                        }
                     }
 
                     HStack {
@@ -140,40 +95,6 @@ struct AddTaskView: View {
                                 .foregroundColor(.gray)
                             }
                             .buttonStyle(.bordered)
-                            .sheet(isPresented: $showDeadlinePicker) {
-                                NavigationView {
-                                    VStack(alignment: .center) {
-                                        Label(
-                                            "Select a Deadline",
-                                            systemImage: "timer")
-
-                                        DatePicker(
-                                            "Deadline",
-                                            selection: Binding(
-                                                get: {
-                                                    selectedDeadline
-                                                        ?? selectedTime!
-                                                },
-                                                set: { selectedDeadline = $0 }
-                                            ),
-                                            in: selectedTime!...,
-                                            displayedComponents: [
-                                                .hourAndMinute
-                                            ]
-                                        )
-                                        .datePickerStyle(.wheel)
-                                        .labelsHidden()
-                                        .padding()
-
-                                        Spacer()
-                                    }
-                                    .navigationBarItems(
-                                        trailing: Button("Done") {
-                                            showDeadlinePicker = false
-                                        })
-                                }
-                                .frame(maxHeight: .infinity, alignment: .top)
-                            }
                         }
                     }
 
@@ -217,6 +138,90 @@ struct AddTaskView: View {
                     }
                 }
             }
+        }
+        .sheet(isPresented: $showDatePicker) {
+            NavigationView {
+                VStack {
+                    Label("Select Date", systemImage: "calendar")
+
+                    DatePicker(
+                        "Select Date",
+                        selection: $taskDateStore.TaskDate,
+                        in: Date()...,
+                        displayedComponents: [.date]
+                    )
+                    .datePickerStyle(.graphical)
+                    .padding()
+                    .padding(.horizontal)
+                    .accentColor(.indigo)
+
+                    Spacer()
+                }
+                .navigationBarItems(
+                    trailing: Button("Done") {
+                        showDatePicker = false
+                    })
+            }
+        }
+        .sheet(isPresented: $showTimePicker) {
+            NavigationView {
+                VStack(alignment: .center) {
+                    Label("Select Time", systemImage: "clock")
+                    DatePicker(
+                        "",
+                        selection: Binding(
+                            get: { selectedTime ?? Date() },
+                            set: { selectedTime = $0 }
+                        ),
+                        in: Date()...,
+                        displayedComponents: [.hourAndMinute]
+                    )
+                    .datePickerStyle(.wheel)
+                    .padding()
+                    .labelsHidden()
+
+                    Spacer()
+                }
+                .navigationBarItems(
+                    trailing: Button("Done") {
+                        showTimePicker = false
+                    })
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
+        }
+        .sheet(isPresented: $showDeadlinePicker) {
+            NavigationView {
+                VStack(alignment: .center) {
+                    Label(
+                        "Select a Deadline",
+                        systemImage: "timer")
+
+                    DatePicker(
+                        "Deadline",
+                        selection: Binding(
+                            get: {
+                                selectedDeadline
+                                    ?? selectedTime!
+                            },
+                            set: { selectedDeadline = $0 }
+                        ),
+                        in: selectedTime!...,
+                        displayedComponents: [
+                            .hourAndMinute
+                        ]
+                    )
+                    .datePickerStyle(.wheel)
+                    .labelsHidden()
+                    .padding()
+
+                    Spacer()
+                }
+                .navigationBarItems(
+                    trailing: Button("Done") {
+                        showDeadlinePicker = false
+                    })
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
         }
         .onAppear {
             showKeyboard = true
