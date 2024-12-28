@@ -12,13 +12,31 @@ struct todoApp: App {
     @StateObject private var timeStore = GlobalTimeStore()
     @StateObject private var taskStore = TaskStore()
     @StateObject private var taskDateStore = GlobalTaskDateStore()
+    @StateObject private var appLockManager = AppLockManager()
 
     var body: some Scene {
         WindowGroup {
-            MainView()
-                .environmentObject(timeStore)
-                .environmentObject(taskStore)
-                .environmentObject(taskDateStore)
+            Group {
+                if appLockManager.isAppLocked {
+                    LockScreenView()
+                        .environmentObject(appLockManager)
+                } else {
+                    MainView()
+                        .environmentObject(timeStore)
+                        .environmentObject(taskStore)
+                        .environmentObject(taskDateStore)
+                        .onAppear {
+                            // Lock app again when it is minimized
+                            NotificationCenter.default.addObserver(
+                                forName: UIApplication.willResignActiveNotification,
+                                object: nil,
+                                queue: .main
+                            ) { _ in
+                                appLockManager.isAppLocked = true
+                            }
+                        }
+                }
+            }
         }
     }
 }
