@@ -14,5 +14,9 @@
     <!-- Optional: Add Touch ID support for older devices -->
     <key>NSBiometricUsageDescription</key>
     <string>This app uses Touch ID or Face ID to secure your data.</string>
+    
+    <!-- Notification -->
+    <key>NSUserNotificationUsageDescription</key>
+    <string>This app uses notifications to remind you of your tasks.</string>
 </dict>
 </plist>
