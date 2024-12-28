@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct AddTaskView: View {
+    var themeColor: Color = .indigo
+
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var taskDateStore: GlobalTaskDateStore
     @EnvironmentObject var taskStore: TaskStore
@@ -20,20 +22,12 @@ struct AddTaskView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.clear
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        withAnimation {
-                            // No suggestions to dismiss anymore
-                        }
-                    }
-
                 VStack {
                     Form {
                         Section {
                             HStack {
-                                Image(systemName: "pencil.and.list.clipboard")
-                                    .foregroundColor(.gray)
+                                Image(systemName: "plus.circle")
+                                    .foregroundColor(themeColor)
                                 
                                 HStack {
                                     TextField("I want to ...", text: $taskTitle)
@@ -45,14 +39,14 @@ struct AddTaskView: View {
                                         taskTitle = ""
                                     } label: {
                                         Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(.indigo)
+                                            .foregroundColor(themeColor)
                                     }
                                 }
                             }
 
                             HStack {
-                                Image(systemName: "scribble.variable")
-                                    .foregroundColor(.gray)
+                                Image(systemName: "note.text")
+                                    .foregroundColor(themeColor)
                                 HStack {
                                     TextField("Add a note", text: $taskNote)
 
@@ -61,7 +55,7 @@ struct AddTaskView: View {
                                             taskNote = ""
                                         } label: {
                                             Image(systemName: "xmark.circle.fill")
-                                                .foregroundColor(.indigo)
+                                                .foregroundColor(themeColor)
                                         }
                                     }
                                 }
@@ -82,9 +76,9 @@ struct AddTaskView: View {
                                             )
                                         )
                                     }
-                                    .foregroundColor(.gray)
                                 }
                                 .buttonStyle(.bordered)
+                                .tint(themeColor) // Replaced .indigo with themeColor
 
                                 Button {
                                     showTimePicker = true
@@ -97,9 +91,9 @@ struct AddTaskView: View {
                                             ) ?? "All day"
                                         )
                                     }
-                                    .foregroundColor(.gray)
                                 }
                                 .buttonStyle(.bordered)
+                                .tint(themeColor) // Replaced .indigo with themeColor
                             }
 
                             if selectedTime != nil {
@@ -114,9 +108,9 @@ struct AddTaskView: View {
                                             : "No Deadline"
                                         )
                                     }
-                                    .foregroundColor(.gray)
                                 }
                                 .buttonStyle(.bordered)
+                                .tint(themeColor) // Replaced .indigo with themeColor
                             }
                         }
 
@@ -139,7 +133,7 @@ struct AddTaskView: View {
                                 .padding(8)
                             }
                             .buttonStyle(.borderedProminent)
-                            .tint(.indigo)
+                            .tint(themeColor) // Replaced .indigo with themeColor
                         }
                     }
                     .scrollContentBackground(.hidden)
@@ -151,17 +145,19 @@ struct AddTaskView: View {
                         dismiss()
                     }
                     .foregroundColor(.pink)
+                    .bold()
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     HStack {
                         Image(systemName: "plus.circle.fill")
                         Text("New Task")
                     }
+                    .foregroundColor(themeColor)
                 }
             }
         }
         .onAppear {
-            // No need to load suggestions anymore
+            isTitleFocused = true // Automatically focus the taskTitle TextField
         }
         .sheet(isPresented: $showDatePicker) {
             NavigationView {
@@ -239,3 +235,4 @@ struct AddTaskView: View {
         }
     }
 }
+
