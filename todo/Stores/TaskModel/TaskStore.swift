@@ -34,7 +34,7 @@ class TaskStore: ObservableObject {
 
         tasks.append(newTask)
         HapticsManager.mediumImpact()
-        scheduleNotification(for: newTask)
+        ScheduleNotification(for: newTask)
     }
 
     // Toggle task completion
@@ -65,39 +65,6 @@ class TaskStore: ObservableObject {
                 print("Notification permission granted.")
             } else {
                 print("Notification permission denied.")
-            }
-        }
-    }
-
-    // Schedule a notification for a specific task
-    private func scheduleNotification(for task: Task) {
-        guard let taskTime = task.time else {
-            print("Skipping notification: Task has no time.")
-            return
-        }
-
-        let content = UNMutableNotificationContent()
-        content.title = task.title
-        content.body = task.note.isEmpty ? "It's time for your task!" : task.note
-        content.sound = .default
-
-        let triggerDate = Calendar.current.dateComponents(
-            [.year, .month, .day, .hour, .minute],
-            from: taskTime
-        )
-
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-        let request = UNNotificationRequest(
-            identifier: task.id.uuidString,
-            content: content,
-            trigger: trigger
-        )
-
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Failed to schedule notification: \(error.localizedDescription)")
-            } else {
-                print("Notification scheduled for task: \(task.title) at \(taskTime)")
             }
         }
     }
