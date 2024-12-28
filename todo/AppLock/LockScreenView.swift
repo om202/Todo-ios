@@ -23,13 +23,18 @@ struct LockScreenView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.indigo)
 
+            if appLockManager.failedAttempts {
+                Text("Unlock App using FaceID")
+                    .foregroundColor(.gray)
+            }
+
             // Retry Button
             Button(action: {
                 appLockManager.authenticateUser()
             }) {
                 HStack {
                     Image(systemName: "faceid")
-                    Text("Unlock")
+                    Text("Retry Face ID")
                         .fontWeight(.semibold)
                 }
                 .padding()
@@ -42,7 +47,11 @@ struct LockScreenView: View {
         .padding()
         .onAppear {
             // Automatically attempt Face ID when the lock screen appears
-            appLockManager.authenticateUser()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { // half seconds delay   
+                if !appLockManager.failedAttempts {
+                    appLockManager.authenticateUser()
+                }
+            }
         }
     }
 }

@@ -32,7 +32,19 @@ struct todoApp: App {
                                 queue: .main
                             ) { _ in
                                 appLockManager.isAppLocked = true
-                                appLockManager.failedAttempts = false // Reset failed state
+                                appLockManager.failedAttempts = false
+                            }
+
+                            NotificationCenter.default.addObserver(
+                                forName: UIApplication.didBecomeActiveNotification,
+                                object: nil,
+                                queue: .main
+                            ) { _ in
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                                    if appLockManager.isAppLocked {
+                                        appLockManager.authenticateUser()
+                                    }
+                                }
                             }
                         }
                 }

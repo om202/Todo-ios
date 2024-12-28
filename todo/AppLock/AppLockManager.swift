@@ -18,6 +18,8 @@ class AppLockManager: ObservableObject {
 
         // Always create a new context for authentication
         let context = LAContext()
+        context.localizedCancelTitle = "Cancel"
+
         var error: NSError?
 
         // Check if biometrics are available
