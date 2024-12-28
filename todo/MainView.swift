@@ -15,14 +15,14 @@ struct MainView: View {
                 HStack {
                     List {
                         if taskStore.tasks.isEmpty {
-                            NoTasksView()
+                            NoTasksView(currentDate: taskDateStore.TaskDate)
                         } else {
                             let filteredTasks = taskStore.tasks.filter {
                                 Calendar.current.isDate($0.date, inSameDayAs: taskDateStore.TaskDate)
                             }
 
                             if filteredTasks.isEmpty {
-                                NoTasksView()
+                                NoTasksView(currentDate: taskDateStore.TaskDate)
                             } else {
                                 ForEach(filteredTasks) { task in
                                     TaskSection(task: task)

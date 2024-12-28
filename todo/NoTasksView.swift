@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct NoTasksView: View {
+    var currentDate: Date;
     var body: some View {
-        VStack(spacing: 20) {
-
+        VStack(spacing: 16) {
             ZStack {
                 LinearGradient(
                     gradient: Gradient(colors: [.orange, .yellow]),
@@ -19,18 +19,25 @@ struct NoTasksView: View {
             }
 
             // Title
-            Text("No Tasks Today!")
+            Text("No Tasks")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.indigo)
+            
+            Text(FormatDate(date: currentDate))
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.orange)
+
 
             // Subtitle
-            Text("You're all set for now. Add new tasks to stay productive!")
+            Text("Add new tasks to stay productive!")
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.gray)
                 .padding(.horizontal, 24)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
     }
 }
