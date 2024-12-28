@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B8AD18232D1FCEB200765788 /* Fuse in Frameworks */ = {isa = PBXBuildFile; productRef = B8AD18222D1FCEB200765788 /* Fuse */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B8B5EBD72D1882C200545786 /* todo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = todo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8AD18232D1FCEB200765788 /* Fuse in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = todo;
 			packageProductDependencies = (
+				B8AD18222D1FCEB200765788 /* Fuse */,
 			);
 			productName = todo;
 			productReference = B8B5EBD72D1882C200545786 /* todo.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = B8B5EBCE2D1882C200545786;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B8AD18212D1FCEB200765788 /* XCRemoteSwiftPackageReference "fuse-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B8B5EBD82D1882C200545786 /* Products */;
 			projectDirPath = "";
@@ -324,6 +333,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B8AD18212D1FCEB200765788 /* XCRemoteSwiftPackageReference "fuse-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krisk/fuse-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B8AD18222D1FCEB200765788 /* Fuse */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B8AD18212D1FCEB200765788 /* XCRemoteSwiftPackageReference "fuse-swift" */;
+			productName = Fuse;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B8B5EBCF2D1882C200545786 /* Project object */;
 }

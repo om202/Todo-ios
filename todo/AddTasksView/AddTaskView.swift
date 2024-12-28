@@ -1,4 +1,5 @@
 import SwiftUI
+import Fuse
 
 struct AddTaskView: View {
     @Environment(\.dismiss) private var dismiss
@@ -21,6 +22,8 @@ struct AddTaskView: View {
 
     @FocusState private var isTitleFocused: Bool
 
+    private let fuse = Fuse()
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -42,15 +45,22 @@ struct AddTaskView: View {
                                 HStack {
                                     TextField("I want to ...", text: $taskTitle)
                                         .focused($isTitleFocused)
-                                        .onChange(of: taskTitle) {oldValue, newValue in
+                                        .onChange(of: taskTitle) { _, newValue in
                                             guard newValue.count > 2 else {
                                                 filteredSuggestions = []
                                                 return
                                             }
                                             if !isSelectingSuggestion {
-                                                filteredSuggestions = suggestions.filter {
-                                                    $0.lowercased()
-                                                        .contains(newValue.lowercased())
+                                                // Use Fuse to fuzzy-match the user's text against our suggestions
+                                                let results = fuse.search(
+                                                    newValue,
+                                                    in: suggestions
+                                                )
+                                                // Sort by best score (lowest = best match)
+                                                let sortedResults = results.sorted { $0.score < $1.score }
+                                                // Map back to the actual suggestion strings
+                                                filteredSuggestions = sortedResults.map {
+                                                    suggestions[$0.index]
                                                 }
                                             }
                                         }
@@ -146,8 +156,7 @@ struct AddTaskView: View {
                                     deadline: ZeroOutSeconds(from: selectedDeadline)
                                 )
                                 dismiss()
-                            }
-                            label: {
+                            } label: {
                                 HStack {
                                     Image(systemName: "circle.fill")
                                     Text("Let's do it!")
@@ -161,7 +170,6 @@ struct AddTaskView: View {
                     }
                     .scrollContentBackground(.hidden)
 
-                    // Only show overlay if we have suggestions AND the title field is focused
                     if !filteredSuggestions.isEmpty && isTitleFocused {
                         suggestionsOverlay
                     }
@@ -310,6 +318,9 @@ struct AddTaskView: View {
     }
 
     private func loadSuggestions() {
+        // If you have a "TaskSuggestions.json" file in your Bundle
+        // with a structure [ { "id": X, "todo": "Some text" }, ... ],
+        // then decode it here. Otherwise, customize as needed.
         if let url = Bundle.main.url(
             forResource: "TaskSuggestions",
             withExtension: "json"
@@ -321,6 +332,7 @@ struct AddTaskView: View {
     }
 }
 
+// MARK: - TaskSuggestion Model
 struct TaskSuggestion: Codable {
     let id: Int
     let todo: String
