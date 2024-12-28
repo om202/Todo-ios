@@ -26,13 +26,13 @@ struct todoApp: App {
                         .environmentObject(taskStore)
                         .environmentObject(taskDateStore)
                         .onAppear {
-                            // Lock app again when it is minimized
                             NotificationCenter.default.addObserver(
                                 forName: UIApplication.willResignActiveNotification,
                                 object: nil,
                                 queue: .main
                             ) { _ in
                                 appLockManager.isAppLocked = true
+                                appLockManager.failedAttempts = false // Reset failed state
                             }
                         }
                 }

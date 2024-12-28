@@ -5,6 +5,7 @@
 //  Created by Omprakash Sah Kanu on 12/28/24.
 //
 import SwiftUI
+import LocalAuthentication
 
 struct LockScreenView: View {
     @EnvironmentObject var appLockManager: AppLockManager
@@ -22,12 +23,13 @@ struct LockScreenView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.indigo)
 
+            // Retry Button
             Button(action: {
                 appLockManager.authenticateUser()
             }) {
                 HStack {
                     Image(systemName: "faceid")
-                    Text("Unlock with Face ID")
+                    Text("Unlock")
                         .fontWeight(.semibold)
                 }
                 .padding()
@@ -38,5 +40,9 @@ struct LockScreenView: View {
             }
         }
         .padding()
+        .onAppear {
+            // Automatically attempt Face ID when the lock screen appears
+            appLockManager.authenticateUser()
+        }
     }
 }
