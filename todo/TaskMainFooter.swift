@@ -21,11 +21,11 @@ struct TaskMainFooter: View {
             // Date Navigation
             Button(action: { addDays(-1) }) {
                 Image(systemName: "arrow.left.circle.fill")
-                    .font(.title3)
+                    .font(.title)
                     .foregroundColor(themeColor)
             }
 
-            Spacer()
+            Spacer().frame(width: 24)
 
             // Current Date Button
             Button(action: {
@@ -46,12 +46,12 @@ struct TaskMainFooter: View {
                     )
             }
 
-            Spacer()
+            Spacer().frame(width: 24)
 
             // Date Navigation
             Button(action: { addDays(1) }) {
                 Image(systemName: "arrow.right.circle.fill")
-                    .font(.title3)
+                    .font(.title)
                     .foregroundColor(themeColor)
             }
 
@@ -63,9 +63,12 @@ struct TaskMainFooter: View {
                     editTask.toggle()
                 }
             }) {
-                Image(systemName: "plus.circle.fill")
-                    .font(.largeTitle)
-                    .foregroundColor(themeColor)
+                HStack {
+                    Image(systemName: "plus")
+                    Text("Add Task")
+                }
+                .font(.title3)
+                .foregroundColor(themeColor)
             }
             .shadow(
                 color: themeColor.opacity(0.5),
@@ -74,9 +77,9 @@ struct TaskMainFooter: View {
                 y: 4
             )
         }
-        
+
         .padding(.horizontal)
-        .padding(.vertical, 2)
+        .padding(.top, 4)
         .sheet(isPresented: $editTask) {
             AddTaskView()
         }
