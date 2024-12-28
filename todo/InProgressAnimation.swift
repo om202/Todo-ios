@@ -18,7 +18,8 @@ struct InProgressAnimation: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 8) {
+            // Time Description
             HStack {
                 Text(timeDescription)
                     .font(.caption)
@@ -35,11 +36,13 @@ struct InProgressAnimation: View {
                         indeterminateProgressBar(width: geometry.size.width)
                     }
                 }
-                .cornerRadius(10)
+                .cornerRadius(height / 2)
                 .clipped()
             }
+            .frame(height: height)
         }
         .frame(height: height + 20)
+        .padding(.vertical, 8)
         .onAppear {
             if finishTime != nil { calculateProgress() }
         }
@@ -78,14 +81,14 @@ struct InProgressAnimation: View {
     private var progressBackgroundBar: some View {
         RoundedRectangle(cornerRadius: height / 2)
             .frame(height: height)
-            .foregroundColor(.gray.opacity(0.1))
+            .foregroundColor(.gray.opacity(0.2))
     }
 
     private func determinateProgressBar(width: CGFloat) -> some View {
         RoundedRectangle(cornerRadius: height / 2)
             .fill(barColor(for: progress))
             .frame(width: width * progress, height: height)
-            .animation(.linear(duration: 0.2), value: progress)
+            .animation(.easeInOut(duration: 0.3), value: progress)
     }
 
     private func barColor(for progress: CGFloat) -> Color {

@@ -14,57 +14,41 @@ struct MainView: View {
             VStack {
                 HStack {
                     List {
-                        if taskStore.tasks.count > 0 {
-                            let filteredTask = taskStore.tasks
-                                .filter {
-                                    Calendar.current.isDate($0.date, inSameDayAs: taskDateStore.TaskDate)
-                                }
+                        if taskStore.tasks.isEmpty {
+                            NoTasksView()
+                        } else {
+                            let filteredTasks = taskStore.tasks.filter {
+                                Calendar.current.isDate($0.date, inSameDayAs: taskDateStore.TaskDate)
+                            }
 
-                            if filteredTask.isEmpty {
-                                HStack {
-                                    Image(systemName: "tray")
-                                    Text("No Tasks")
-                                }
-                                .padding()
-                                .font(.title3)
-                                .foregroundColor(.gray)
+                            if filteredTasks.isEmpty {
+                                NoTasksView()
                             } else {
-                                ForEach(filteredTask) { task in
+                                ForEach(filteredTasks) { task in
                                     TaskSection(task: task)
                                 }
                                 .onDelete { indices in
                                     taskStore.deleteTask(at: indices)
                                 }
                             }
-                        } else {
-                            VStack {
-                                Image(systemName: "cat")
-                                    .font(.largeTitle)
-                                    .padding(.bottom, 8)
-                                Text("Use the + button to add tasks.")
-                                    .font(.headline)
-                                    .foregroundColor(.secondary)
-                            }
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                            .multilineTextAlignment(.center)
                         }
                     }
                     .scrollContentBackground(.hidden)
                     .background(
-                        useImageBG
-                            ? AnyView(
+                        Group {
+                            if useImageBG {
                                 Image("bg")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .edgesIgnoringSafeArea(.all)
-                              )
-                            : AnyView(
+                            } else {
                                 LinearGradient(
                                     gradient: Gradient(colors: [.purple, .indigo]),
                                     startPoint: .top,
                                     endPoint: .bottom
                                 )
-                              )
+                            }
+                        }
+                        .edgesIgnoringSafeArea(.all) // Apply to both options
                     )
                     // Use .navigationBarLeading / .navigationBarTrailing for iOS 16 or earlier
                     .toolbar {
@@ -72,6 +56,13 @@ struct MainView: View {
                             Text(formattedDate)
                                 .bold()
                                 .font(.title)
+                                .foregroundColor(.indigo)
+                                .shadow(
+                                    color: Color.white.opacity(0.3),
+                                    radius: 1,
+                                    x: 1,
+                                    y: 1
+                                )
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {}) {
@@ -81,7 +72,13 @@ struct MainView: View {
                                     .frame(width: 32, height: 32)
                             }
                             .buttonStyle(.automatic)
-                            .foregroundColor(.primary)
+                            .foregroundColor(.indigo)
+                            .shadow(
+                                color: Color.white.opacity(0.3),
+                                radius: 1,
+                                x: 1,
+                                y: 1
+                            )
                         }
                     }
                 }
