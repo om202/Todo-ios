@@ -1,5 +1,4 @@
 import SwiftUI
-import Fuse
 
 struct AddTaskView: View {
     @Environment(\.dismiss) private var dismiss
@@ -8,10 +7,6 @@ struct AddTaskView: View {
 
     @State private var taskTitle: String = ""
     @State private var taskNote: String = ""
-
-    @State private var suggestions: [String] = []
-    @State private var filteredSuggestions: [String] = []
-    @State private var isSelectingSuggestion: Bool = false
 
     @State private var showDatePicker: Bool = false
     @State private var showTimePicker: Bool = false
@@ -22,8 +17,6 @@ struct AddTaskView: View {
 
     @FocusState private var isTitleFocused: Bool
 
-    private let fuse = Fuse()
-
     var body: some View {
         NavigationView {
             ZStack {
@@ -31,7 +24,7 @@ struct AddTaskView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation {
-                            filteredSuggestions = []
+                            // No suggestions to dismiss anymore
                         }
                     }
 
@@ -45,33 +38,14 @@ struct AddTaskView: View {
                                 HStack {
                                     TextField("I want to ...", text: $taskTitle)
                                         .focused($isTitleFocused)
-                                        .onChange(of: taskTitle) { _, newValue in
-                                            guard newValue.count > 2 else {
-                                                filteredSuggestions = []
-                                                return
-                                            }
-                                            if !isSelectingSuggestion {
-                                                // Use Fuse to fuzzy-match the user's text against our suggestions
-                                                let results = fuse.search(
-                                                    newValue,
-                                                    in: suggestions
-                                                )
-                                                // Sort by best score (lowest = best match)
-                                                let sortedResults = results.sorted { $0.score < $1.score }
-                                                // Map back to the actual suggestion strings
-                                                filteredSuggestions = sortedResults.map {
-                                                    suggestions[$0.index]
-                                                }
-                                            }
-                                        }
+                                }
 
-                                    if !taskTitle.isEmpty {
-                                        Button {
-                                            taskTitle = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .foregroundColor(.indigo)
-                                        }
+                                if !taskTitle.isEmpty {
+                                    Button {
+                                        taskTitle = ""
+                                    } label: {
+                                        Image(systemName: "xmark.circle.fill")
+                                            .foregroundColor(.indigo)
                                     }
                                 }
                             }
@@ -169,10 +143,6 @@ struct AddTaskView: View {
                         }
                     }
                     .scrollContentBackground(.hidden)
-
-                    if !filteredSuggestions.isEmpty && isTitleFocused {
-                        suggestionsOverlay
-                    }
                 }
             }
             .toolbar {
@@ -191,7 +161,7 @@ struct AddTaskView: View {
             }
         }
         .onAppear {
-            loadSuggestions()
+            // No need to load suggestions anymore
         }
         .sheet(isPresented: $showDatePicker) {
             NavigationView {
@@ -268,72 +238,4 @@ struct AddTaskView: View {
             }
         }
     }
-
-    private var suggestionsOverlay: some View {
-        VStack {
-            HStack {
-                Text("Suggestions")
-                Spacer()
-                Button {
-                    withAnimation {
-                        filteredSuggestions = []
-                    }
-                } label: {
-                    Image(systemName: "xmark")
-                }
-            }
-            .foregroundColor(.indigo)
-            .padding(.vertical, 8)
-            .padding(.horizontal)
-
-            ScrollView {
-                VStack(spacing: 0) {
-                    ForEach(filteredSuggestions, id: \.self) { suggestion in
-                        VStack {
-                            Text(suggestion)
-                                .padding()
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .background(Color(.systemGray6))
-                                .onTapGesture {
-                                    withAnimation {
-                                        isSelectingSuggestion = true
-                                        taskTitle = suggestion
-                                        filteredSuggestions = []
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                            isSelectingSuggestion = false
-                                        }
-                                    }
-                                }
-                        }
-                        Divider()
-                    }
-                }
-            }
-            .background(Color.clear)
-        }
-        .background(Color(.systemGray6))
-        .frame(maxWidth: .infinity, alignment: .top)
-        .transition(.opacity)
-        .animation(.easeInOut, value: filteredSuggestions)
-    }
-
-    private func loadSuggestions() {
-        // If you have a "TaskSuggestions.json" file in your Bundle
-        // with a structure [ { "id": X, "todo": "Some text" }, ... ],
-        // then decode it here. Otherwise, customize as needed.
-        if let url = Bundle.main.url(
-            forResource: "TaskSuggestions",
-            withExtension: "json"
-        ),
-        let data = try? Data(contentsOf: url),
-        let decoded = try? JSONDecoder().decode([TaskSuggestion].self, from: data) {
-            suggestions = decoded.map { $0.todo }
-        }
-    }
-}
-
-// MARK: - TaskSuggestion Model
-struct TaskSuggestion: Codable {
-    let id: Int
-    let todo: String
 }
