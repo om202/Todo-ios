@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TaskMainFooter: View {
+    var themeColor: Color = .indigo
     @EnvironmentObject var taskDateStore: GlobalTaskDateStore
     @State private var isCalendarPresented: Bool = false
     @State private var editTask: Bool = false
@@ -16,62 +17,75 @@ struct TaskMainFooter: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                // Date Navigation Controls
-                HStack {
-                    Button(action: { addDays(-1) }) {
-                        Image(systemName: "arrow.left")
-                    }
-                    .buttonStyle(.borderless)
-                    .padding(.trailing, 8)
-                    .font(.title2)
-                    .foregroundColor(.gray)
-
-                    // Tap to open calendar
-                    Button("\(formattedDate)") {
-                        isCalendarPresented = true  // Show calendar
-                    }
-                    .buttonStyle(.plain)
-
-                    Button(action: { addDays(1) }) {
-                        Image(systemName: "arrow.right")
-                    }
-                    .buttonStyle(.borderless)
-                    .padding(.leading, 8)
-                    .font(.title2)
-                    .foregroundColor(.gray)
-                }
-
-                Spacer()
-
-                // Add Task Button
-                Button(action: {
-                    withAnimation {
-                        editTask.toggle()
-                    }
-                }) {
-                    Label {
-                        Text("Add Task")
-                            .padding(.leading, 8)
-                    } icon: {
-                        Image(systemName: "plus")
-                    }
-                    .foregroundColor(.indigo)
-                }.buttonStyle(.plain)
+        HStack {
+            // Date Navigation
+            Button(action: { addDays(-1) }) {
+                Image(systemName: "arrow.left.circle.fill")
+                    .font(.title3)
+                    .foregroundColor(themeColor)
             }
-            .foregroundColor(.primary)
-            .padding()
-            .bold()
+
+            Spacer()
+
+            // Current Date Button
+            Button(action: {
+                isCalendarPresented = true
+            }) {
+                Text(formattedDate)
+                    .font(.subheadline)
+                    .foregroundColor(themeColor)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(Color(UIColor.systemGray6))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(themeColor.opacity(0.5), lineWidth: 1)
+                    )
+            }
+
+            Spacer()
+
+            // Date Navigation
+            Button(action: { addDays(1) }) {
+                Image(systemName: "arrow.right.circle.fill")
+                    .font(.title3)
+                    .foregroundColor(themeColor)
+            }
+
+            Spacer()
+
+            // Add Task Button
+            Button(action: {
+                withAnimation {
+                    editTask.toggle()
+                }
+            }) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.largeTitle)
+                    .foregroundColor(themeColor)
+            }
+            .shadow(
+                color: themeColor.opacity(0.5),
+                radius: 10,
+                x: 0,
+                y: 4
+            )
         }
+        
+        .padding(.horizontal)
+        .padding(.vertical, 2)
         .sheet(isPresented: $editTask) {
             AddTaskView()
         }
-        // Calendar Modal
         .sheet(isPresented: $isCalendarPresented) {
             NavigationView {
                 VStack {
                     Label("Select Date", systemImage: "calendar")
+                        .font(.headline)
+                        .foregroundColor(themeColor)
 
                     DatePicker(
                         "Select Date",
@@ -81,15 +95,16 @@ struct TaskMainFooter: View {
                     )
                     .datePickerStyle(.graphical)
                     .padding()
-                    .padding(.horizontal)
-                    .accentColor(.indigo)
+                    .accentColor(themeColor)
 
                     Spacer()
                 }
                 .navigationBarItems(
                     trailing: Button("Done") {
                         isCalendarPresented = false
-                    })
+                    }
+                    .foregroundColor(themeColor)
+                )
             }
         }
     }

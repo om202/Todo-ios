@@ -21,143 +21,168 @@ struct AddTaskView: View {
 
     var body: some View {
         NavigationView {
-            ZStack {
-                VStack {
-                    Form {
-                        Section {
+            VStack(spacing: 16) {
+                // Header Section
+                VStack(spacing: 8) {
+                    Text("Create Your Task")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(themeColor)
+                    Text("Plan your day by adding tasks below.")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+                .padding(.top)
+
+                // Task Title and Note Section
+                VStack(spacing: 12) {
+                    TextField("What do you want to accomplish?", text: $taskTitle)
+                        .focused($isTitleFocused)
+                        .padding()
+                        .background(Color(UIColor.systemGray6))
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(themeColor.opacity(0.5), lineWidth: 1)
+                        )
+
+                    TextField("Add a note (optional)", text: $taskNote)
+                        .padding()
+                        .background(Color(UIColor.systemGray6))
+                        .cornerRadius(12)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(themeColor.opacity(0.5), lineWidth: 1)
+                        )
+                }
+                .padding(.horizontal)
+
+                // Schedule Section
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Schedule")
+                        .font(.headline)
+                        .foregroundColor(themeColor)
+
+                    VStack(spacing: 12) {
+                        Button {
+                            showDatePicker = true
+                        } label: {
                             HStack {
-                                Image(systemName: "plus.circle")
-                                    .foregroundColor(themeColor)
-                                
-                                HStack {
-                                    TextField("I want to ...", text: $taskTitle)
-                                        .focused($isTitleFocused)
-                                }
-
-                                if !taskTitle.isEmpty {
-                                    Button {
-                                        taskTitle = ""
-                                    } label: {
-                                        Image(systemName: "xmark.circle.fill")
-                                            .foregroundColor(themeColor)
-                                    }
-                                }
-                            }
-
-                            HStack {
-                                Image(systemName: "note.text")
-                                    .foregroundColor(themeColor)
-                                HStack {
-                                    TextField("Add a note", text: $taskNote)
-
-                                    if !taskNote.isEmpty {
-                                        Button {
-                                            taskNote = ""
-                                        } label: {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .foregroundColor(themeColor)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        Section {
-                            HStack {
-                                Button {
-                                    showDatePicker = true
-                                } label: {
-                                    HStack {
-                                        Image(systemName: "calendar")
-                                        Text(
-                                            taskDateStore.TaskDate.formatted(
-                                                date: .abbreviated,
-                                                time: .omitted
-                                            )
-                                        )
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                                .tint(themeColor) // Replaced .indigo with themeColor
-
-                                Button {
-                                    showTimePicker = true
-                                } label: {
-                                    HStack {
-                                        Image(systemName: "clock")
-                                        Text(
-                                            selectedTime?.formatted(
-                                                .dateTime.hour().minute()
-                                            ) ?? "All day"
-                                        )
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                                .tint(themeColor) // Replaced .indigo with themeColor
-                            }
-
-                            if selectedTime != nil {
-                                Button {
-                                    showDeadlinePicker = true
-                                } label: {
-                                    HStack {
-                                        Image(systemName: "timer")
-                                        Text(
-                                            selectedDeadline != nil
-                                            ? "Finish by \(selectedDeadline!.formatted(.dateTime.hour().minute()))"
-                                            : "No Deadline"
-                                        )
-                                    }
-                                }
-                                .buttonStyle(.bordered)
-                                .tint(themeColor) // Replaced .indigo with themeColor
-                            }
-                        }
-
-                        Section {
-                            Button {
-                                taskStore.addTask(
-                                    title: taskTitle,
-                                    note: taskNote,
-                                    date: ZeroOutSeconds(from: taskDateStore.TaskDate) ?? Date(),
-                                    time: ZeroOutSeconds(from: selectedTime),
-                                    deadline: ZeroOutSeconds(from: selectedDeadline)
+                                Image(systemName: "calendar")
+                                Text(
+                                    taskDateStore.TaskDate.formatted(
+                                        date: .abbreviated,
+                                        time: .omitted
+                                    )
                                 )
-                                dismiss()
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(themeColor.opacity(0.5), lineWidth: 1)
+                            )
+                            .foregroundColor(themeColor)
+                        }
+
+                        Button {
+                            showTimePicker = true
+                        } label: {
+                            HStack {
+                                Image(systemName: "clock")
+                                Text(
+                                    selectedTime?.formatted(.dateTime.hour().minute()) ?? "All day"
+                                )
+                                Spacer()
+                            }
+                            .padding()
+                            .background(Color(UIColor.systemGray6))
+                            .cornerRadius(12)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(themeColor.opacity(0.5), lineWidth: 1)
+                            )
+                            .foregroundColor(themeColor)
+                        }
+
+                        if selectedTime != nil {
+                            Button {
+                                showDeadlinePicker = true
                             } label: {
                                 HStack {
-                                    Image(systemName: "circle.fill")
-                                    Text("Let's do it!")
+                                    Image(systemName: "timer")
+                                    Text(
+                                        selectedDeadline != nil
+                                        ? "Finish by \(selectedDeadline!.formatted(.dateTime.hour().minute()))"
+                                        : "No Deadline"
+                                    )
+                                    Spacer()
                                 }
-                                .font(.headline)
-                                .padding(8)
+                                .padding()
+                                .background(Color(UIColor.systemGray6))
+                                .cornerRadius(12)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(themeColor.opacity(0.5), lineWidth: 1)
+                                )
+                                .foregroundColor(themeColor)
                             }
-                            .buttonStyle(.borderedProminent)
-                            .tint(themeColor) // Replaced .indigo with themeColor
                         }
                     }
-                    .scrollContentBackground(.hidden)
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Cancel") {
+                .padding(.horizontal)
+
+                Spacer()
+
+                // Floating Action Button
+                HStack {
+                    Spacer()
+                    Button {
+                        taskStore.addTask(
+                            title: taskTitle,
+                            note: taskNote,
+                            date: ZeroOutSeconds(from: taskDateStore.TaskDate) ?? Date(),
+                            time: ZeroOutSeconds(from: selectedTime),
+                            deadline: ZeroOutSeconds(from: selectedDeadline)
+                        )
                         dismiss()
+                    } label: {
+                        HStack {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.title2)
+                            Text("Save Task")
+                                .fontWeight(.bold)
+                        }
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(themeColor)
+                        .foregroundColor(.white)
+                        .cornerRadius(20)
+                        .shadow(color: themeColor.opacity(0.4), radius: 5, x: 0, y: 2)
                     }
-                    .foregroundColor(.pink)
-                    .bold()
+                    .padding(.horizontal)
                 }
+                .padding(.bottom)
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    HStack {
-                        Image(systemName: "plus.circle.fill")
-                        Text("New Task")
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        HStack {
+                            Image(systemName: "xmark")
+                            Text("Cancel")
+                        }
+                        .foregroundColor(.pink)
                     }
-                    .foregroundColor(themeColor)
                 }
             }
-        }
-        .onAppear {
-            isTitleFocused = true // Automatically focus the taskTitle TextField
+            .onAppear {
+                isTitleFocused = true
+            }
         }
         .sheet(isPresented: $showDatePicker) {
             NavigationView {
@@ -235,4 +260,3 @@ struct AddTaskView: View {
         }
     }
 }
-
