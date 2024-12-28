@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct TaskSection: View {
+    var themeColor: Color = .indigo
     @EnvironmentObject var taskStore: TaskStore
     @EnvironmentObject var globalTime: GlobalTimeStore
     @State private var isDone: Bool
@@ -14,34 +15,36 @@ struct TaskSection: View {
 
     var body: some View {
         Section {
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 12) {
+                // Upper Section with Time
                 if task.time != nil {
                     TaskUpperSectionView(task: task, isDone: $isDone)
                 }
 
+                // Main Content View
                 TaskContentView(task: task, isDone: $isDone)
 
+                // Note Section
                 if !task.note.trimmingCharacters(in: .whitespaces).isEmpty {
                     TaskNoteView(note: task.note)
                 }
 
+                // Progress View if the task is overdue
                 if let taskTime = task.time,
-                   globalTime.globalTime > taskTime && !isDone
-                {
+                   globalTime.globalTime > taskTime && !isDone {
                     TaskProgressView(task: task)
                 }
             }
             .opacity(isDone ? 0.4 : 1)
             .strikethrough(isDone)
-            .padding(.vertical, 4)
-        }
-        .padding(.vertical, 4)
-        .onTapGesture {
-            withAnimation {
-                isDone.toggle()
-                taskStore.toggleTask(task)
+            .onTapGesture {
+                withAnimation {
+                    isDone.toggle()
+                    taskStore.toggleTask(task)
+                }
             }
         }
+        .padding(.vertical, 8)
     }
 }
 
@@ -50,14 +53,18 @@ private struct TaskContentView: View {
     @Binding var isDone: Bool
 
     var body: some View {
-        HStack {
-            Image(systemName: isDone ? "checkmark.circle.fill" : "circle")
+        HStack(spacing: 12) {
+            // Checkmark Icon
+            Image(systemName: isDone ? "checkmark.square.fill" : "square")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 20, height: 20)
+                .frame(width: 24, height: 24)
                 .foregroundColor(.indigo)
 
+            // Task Title
             Text(task.title)
+                .font(.headline)
+                .foregroundColor(.primary)
                 .padding(.leading, 8)
         }
     }
@@ -69,10 +76,12 @@ private struct TaskNoteView: View {
     var body: some View {
         HStack {
             Image(systemName: "arrow.turn.down.right")
+                .foregroundColor(.gray)
             Text(note)
+                .foregroundColor(.gray)
+                .font(.subheadline)
         }
-        .foregroundColor(.gray)
-        .font(.subheadline)
+        .padding(.top, 4)
     }
 }
 
@@ -87,10 +96,9 @@ private struct TaskProgressView: View {
                 finishTime: task.deadline
             )
         }
-        .strikethrough(false)
         .font(.footnote)
         .foregroundColor(.gray)
-        .padding(.top, 16)
+        .padding(.top, 8)
     }
 }
 
@@ -113,14 +121,16 @@ private struct TimeDisplayView: View {
     let isDone: Bool
 
     var body: some View {
-        HStack {
+        HStack(spacing: 8) {
             startTimeView
 
             if task.deadline != nil {
+                Image(systemName: "arrow.right")
+                    .foregroundColor(.gray)
+
                 deadlineView
             }
         }
-        .strikethrough(false)
     }
 
     private var startTimeView: some View {
@@ -132,7 +142,6 @@ private struct TimeDisplayView: View {
 
     private var deadlineView: some View {
         HStack {
-            Image(systemName: "arrow.right")
             Text(task.deadline?.formatted(.dateTime.hour().minute()) ?? "")
         }
     }
