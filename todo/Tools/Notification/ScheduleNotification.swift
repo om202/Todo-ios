@@ -13,21 +13,27 @@ func ScheduleNotification(for task: Task) {
         print("Skipping notification: Task '\(task.title)' has no valid time.")
         return
     }
-    
-    print("Scheduling Start Notification for task '\(task.title)' at \(taskTime)")
-    
+
+    print(
+        "Scheduling Start Notification for task '\(task.title)' at \(taskTime)")
+
     // Schedule start notification
     let startContent = createNotificationContent(for: task, isDeadline: false)
-    scheduleNotificationAtTime(taskTime: taskTime, task: task, content: startContent, isDeadline: false)
-    
+    scheduleNotificationAtTime(
+        taskTime: taskTime, task: task, content: startContent, isDeadline: false
+    )
+
     // Schedule deadline notification if available
     if let deadline = task.deadline {
         guard let deadlineTime = ZeroOutSeconds(from: deadline) else {
-            print("Skipping deadline notification: Task '\(task.title)' has an invalid deadline.")
+            print(
+                "Skipping deadline notification: Task '\(task.title)' has an invalid deadline."
+            )
             return
         }
         print("Scheduling Deadline for task '\(task.title)' at \(deadlineTime)")
-        let deadlineContent = createNotificationContent(for: task, isDeadline: true)
+        let deadlineContent = createNotificationContent(
+            for: task, isDeadline: true)
         scheduleNotificationAtTime(
             taskTime: deadlineTime,
             task: task,
@@ -38,16 +44,21 @@ func ScheduleNotification(for task: Task) {
 }
 
 // Function to create notification content
-private func createNotificationContent(for task: Task, isDeadline: Bool) -> UNMutableNotificationContent {
+private func createNotificationContent(for task: Task, isDeadline: Bool)
+    -> UNMutableNotificationContent
+{
     let content = UNMutableNotificationContent()
-    content.title = task.title
-    content.body =
+    content.title =
         isDeadline
         ? "You missed the task deadline ☹️"
-        : (task.note.isEmpty ? "It's time to start this task 😎" : task.note)
+        : (task.note.isEmpty
+            ? "It's time to start this task 😎 - Finish by: \(formattedTime(task.deadline ?? Date()))"
+            : task.note)
+    content.body = task.title
     content.sound =
         isDeadline
-        ? UNNotificationSound(named: UNNotificationSoundName("deadline_notif.mp3"))
+        ? UNNotificationSound(
+            named: UNNotificationSoundName("deadline_notif.mp3"))
         : UNNotificationSound(
             named: UNNotificationSoundName("start_notif.mp3"))
     return content
@@ -55,7 +66,8 @@ private func createNotificationContent(for task: Task, isDeadline: Bool) -> UNMu
 
 // Function to schedule a notification at a specific time
 private func scheduleNotificationAtTime(
-    taskTime: Date, task: Task, content: UNMutableNotificationContent, isDeadline: Bool
+    taskTime: Date, task: Task, content: UNMutableNotificationContent,
+    isDeadline: Bool
 ) {
     let triggerDate = Calendar.current.dateComponents(
         [.year, .month, .day, .hour, .minute],
@@ -64,7 +76,7 @@ private func scheduleNotificationAtTime(
 
     let trigger = UNCalendarNotificationTrigger(
         dateMatching: triggerDate, repeats: false)
-    
+
     // Use 'isDeadline' to differentiate identifiers
     let identifier =
         "\(task.id.uuidString)-\(isDeadline ? "deadline" : "start")"
@@ -92,6 +104,13 @@ private func scheduleNotificationAtTime(
 private func formattedDate(_ date: Date) -> String {
     let formatter = DateFormatter()
     formatter.dateStyle = .medium
+    formatter.timeStyle = .short
+    return formatter.string(from: date)
+}
+
+private func formattedTime(_ date: Date) -> String {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .none
     formatter.timeStyle = .short
     return formatter.string(from: date)
 }
