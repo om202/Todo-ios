@@ -33,10 +33,11 @@ struct TaskMainFooter: View {
             }) {
                 Text(formattedDate)
                     .font(.subheadline)
+                    .bold()
                     .foregroundColor(themeColor)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
-                    .frame(width: 120) // Sets the button's width to 200 points
+                    .frame(width: 125) // Sets the button's width to 200 points
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color(UIColor.systemGray6))

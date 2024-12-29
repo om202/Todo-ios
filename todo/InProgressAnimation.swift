@@ -22,7 +22,6 @@ struct InProgressAnimation: View {
             // Time Description
             HStack {
                 Text(timeDescription)
-                    .font(.caption)
                     .foregroundColor(.gray)
                 Spacer()
             }

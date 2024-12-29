@@ -15,7 +15,7 @@ struct TaskSection: View {
 
     var body: some View {
         Section {
-            VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading) {
                 // Upper Section with Time
                 if task.time != nil {
                     TaskUpperSectionView(task: task, isDone: $isDone)
@@ -44,7 +44,8 @@ struct TaskSection: View {
                 }
             }
         }
-        .padding(.vertical, 8)
+        .listSectionSpacing(20)
+        .padding(.vertical, 10)
     }
 }
 
