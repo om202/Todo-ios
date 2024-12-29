@@ -56,9 +56,9 @@ struct MainView: View {
                             Text(formattedDate)
                                 .bold()
                                 .font(.title)
-                                .foregroundColor(.indigo)
+                                .foregroundColor(.primary)
                                 .shadow(
-                                    color: Color.white.opacity(0.3),
+                                    color: Color.white.opacity(0.1),
                                     radius: 1,
                                     x: 1,
                                     y: 1
@@ -72,9 +72,9 @@ struct MainView: View {
                                     .frame(width: 32, height: 32)
                             }
                             .buttonStyle(.automatic)
-                            .foregroundColor(.indigo)
+                            .foregroundColor(.primary)
                             .shadow(
-                                color: Color.white.opacity(0.3),
+                                color: Color.white.opacity(0.1),
                                 radius: 1,
                                 x: 1,
                                 y: 1

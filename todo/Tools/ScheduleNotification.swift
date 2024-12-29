@@ -9,22 +9,20 @@ import UserNotifications
 
 // Schedule a notification for a specific task
 func ScheduleNotification(for task: Task) {
-    guard let taskTime = task.time else {
+    guard let taskTime = ZeroOutSeconds(from: task.time) else {
         print("Skipping notification: Task has no time.")
         return
     }
 
     // Schedule start notification
     let startContent = createNotificationContent(for: task, isDeadline: false)
-    scheduleNotificationAtTime(
-        taskTime: taskTime, task: task, content: startContent)
+    scheduleNotificationAtTime(taskTime: taskTime, task: task, content: startContent)
 
     // Schedule deadline notification if available
-    if let taskDeadline = task.deadline {
-        let deadlineContent = createNotificationContent(
-            for: task, isDeadline: true)
-        scheduleNotificationAtTime(
-            taskTime: taskDeadline, task: task, content: deadlineContent)
+    let taskDeadline = ZeroOutSeconds(from: task.deadline)
+    if taskDeadline != nil {
+        let deadlineContent = createNotificationContent(for: task, isDeadline: true)
+        scheduleNotificationAtTime(taskTime: taskDeadline ?? Date(), task: task, content: deadlineContent)
     }
 }
 

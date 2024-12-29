@@ -23,12 +23,6 @@ struct NoTasksView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.indigo)
-            
-            Text(FormatDate(date: currentDate))
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.orange)
-
 
             // Subtitle
             Text("Add new tasks to stay productive!")

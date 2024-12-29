@@ -25,7 +25,7 @@ struct TaskMainFooter: View {
                     .foregroundColor(themeColor)
             }
 
-            Spacer().frame(width: 24)
+            Spacer().frame(width: 16)
 
             // Current Date Button
             Button(action: {
@@ -36,6 +36,7 @@ struct TaskMainFooter: View {
                     .foregroundColor(themeColor)
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
+                    .frame(width: 120) // Sets the button's width to 200 points
                     .background(
                         RoundedRectangle(cornerRadius: 8)
                             .fill(Color(UIColor.systemGray6))
@@ -45,8 +46,8 @@ struct TaskMainFooter: View {
                             .stroke(themeColor.opacity(0.5), lineWidth: 1)
                     )
             }
-
-            Spacer().frame(width: 24)
+            
+            Spacer().frame(width: 16)
 
             // Date Navigation
             Button(action: { addDays(1) }) {
@@ -79,7 +80,7 @@ struct TaskMainFooter: View {
         }
 
         .padding(.horizontal)
-        .padding(.top, 4)
+        .padding(.bottom, 8)
         .sheet(isPresented: $editTask) {
             AddTaskView()
         }
