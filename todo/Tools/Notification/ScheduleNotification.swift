@@ -26,7 +26,7 @@ func ScheduleNotification(for task: Task) {
             print("Skipping deadline notification: Task '\(task.title)' has an invalid deadline.")
             return
         }
-        print("Scheduling Deadline Notification for task '\(task.title)' at \(deadlineTime)")
+        print("Scheduling Deadline for task '\(task.title)' at \(deadlineTime)")
         let deadlineContent = createNotificationContent(for: task, isDeadline: true)
         scheduleNotificationAtTime(
             taskTime: deadlineTime,
@@ -43,8 +43,8 @@ private func createNotificationContent(for task: Task, isDeadline: Bool) -> UNMu
     content.title = task.title
     content.body =
         isDeadline
-        ? "You missed the task deadline."
-        : (task.note.isEmpty ? "It's time to start this task." : task.note)
+        ? "You missed the task deadline ☹️"
+        : (task.note.isEmpty ? "It's time to start this task 😎" : task.note)
     content.sound =
         isDeadline
         ? UNNotificationSound(named: UNNotificationSoundName("deadline_notif.mp3"))
