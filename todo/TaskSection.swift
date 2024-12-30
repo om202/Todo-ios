@@ -5,7 +5,7 @@ struct TaskSection: View {
     @EnvironmentObject var taskStore: TaskStore
     @EnvironmentObject var globalTime: GlobalTimeStore
     @State private var isDone: Bool
-    
+
     private let task: Task
 
     init(task: Task) {
@@ -17,7 +17,7 @@ struct TaskSection: View {
         Section {
             VStack(alignment: .leading) {
                 // Upper Section with Time
-                if task.time != nil {
+                if task.time != nil && !isDone {
                     TaskUpperSectionView(task: task, isDone: $isDone)
                 }
 
@@ -31,17 +31,16 @@ struct TaskSection: View {
 
                 // Progress View if the task is overdue
                 if let taskTime = task.time,
-                   globalTime.globalTime > taskTime && !isDone {
+                    globalTime.globalTime > taskTime && !isDone
+                {
                     TaskProgressView(task: task)
                 }
             }
             .opacity(isDone ? 0.4 : 1)
             .strikethrough(isDone)
             .onTapGesture {
-                withAnimation {
-                    isDone.toggle()
-                    taskStore.toggleTask(task)
-                }
+                isDone.toggle()
+                taskStore.toggleTask(task)
             }
         }
         .listSectionSpacing(20)
@@ -97,7 +96,7 @@ private struct TaskProgressView: View {
                 finishTime: task.deadline
             )
         }
-        .font(.footnote)
+        .font(.subheadline)
         .foregroundColor(.gray)
         .padding(.top, 8)
     }
@@ -112,7 +111,7 @@ struct TaskUpperSectionView: View {
             Spacer()
             TimeDisplayView(task: task, isDone: isDone)
         }
-        .font(.footnote)
+        .font(.subheadline)
         .foregroundColor(.gray)
     }
 }
@@ -123,27 +122,15 @@ private struct TimeDisplayView: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            startTimeView
-
-            if task.deadline != nil {
-                Image(systemName: "arrow.right")
-                    .foregroundColor(.gray)
-
-                deadlineView
-            }
-        }
-    }
-
-    private var startTimeView: some View {
-        HStack {
-            Image(systemName: "timer")
+            Image(systemName: "clock")
             Text(task.time?.formatted(.dateTime.hour().minute()) ?? "")
-        }
-    }
 
-    private var deadlineView: some View {
-        HStack {
-            Text(task.deadline?.formatted(.dateTime.hour().minute()) ?? "")
+            Image(systemName: "arrow.right")
+                .foregroundColor(.gray)
+
+            Text(
+                task.deadline?.formatted(.dateTime.hour().minute())
+                    ?? "Until Done")
         }
     }
 }

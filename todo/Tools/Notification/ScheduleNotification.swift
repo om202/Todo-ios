@@ -48,12 +48,15 @@ private func createNotificationContent(for task: Task, isDeadline: Bool)
     -> UNMutableNotificationContent
 {
     let content = UNMutableNotificationContent()
+    let taskStartMessage = "Task Time! 😎"
+    let taskEndMessage = "Task Time Over! ⏰"
+
     content.title =
         isDeadline
-        ? "You missed the task deadline ☹️"
-        : (task.note.isEmpty
-            ? "It's time to start this task 😎 - Finish by: \(formattedTime(task.deadline ?? Date()))"
-            : task.note)
+        ? taskEndMessage
+        : (task.deadline != nil
+            ? "\(taskStartMessage) - Finish by \(formattedTime(task.deadline ?? Date()))"
+            : taskStartMessage)
     content.body = task.title
     content.sound =
         isDeadline
@@ -61,6 +64,7 @@ private func createNotificationContent(for task: Task, isDeadline: Bool)
             named: UNNotificationSoundName("deadline_notif.mp3"))
         : UNNotificationSound(
             named: UNNotificationSoundName("start_notif.mp3"))
+
     return content
 }
 

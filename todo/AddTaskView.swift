@@ -43,7 +43,7 @@ struct AddTaskView: View {
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .foregroundColor(themeColor)
-                            Text("Plan your day by adding tasks below.")
+                            Text("Plan your day by adding a task below.")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                         }
@@ -53,10 +53,7 @@ struct AddTaskView: View {
                         VStack(spacing: 16) {
                             // Task Title Input
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Task Title")
-                                    .font(.headline)
-                                    .foregroundColor(themeColor)
-                                TextField("What do you want to accomplish?", text: $taskTitle)
+                                TextField("What would you like to do?", text: $taskTitle)
                                     .padding()
                                     .background(Color(UIColor.systemBackground))
                                     .cornerRadius(10)
@@ -69,10 +66,7 @@ struct AddTaskView: View {
 
                             // Task Note Input
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Note")
-                                    .font(.headline)
-                                    .foregroundColor(themeColor)
-                                TextField("Add a note (optional)", text: $taskNote)
+                                TextField("Write a note...", text: $taskNote)
                                     .padding()
                                     .background(Color(UIColor.systemBackground))
                                     .cornerRadius(10)
@@ -93,31 +87,6 @@ struct AddTaskView: View {
                                 .padding(.horizontal, 20)
 
                             VStack(spacing: 16) {
-                                // Date Picker Button
-                                Button(action: {
-                                    focusedField = nil
-                                    showDatePicker = true
-                                }) {
-                                    HStack {
-                                        Image(systemName: "calendar")
-                                            .foregroundColor(themeColor)
-                                        VStack(alignment: .leading) {
-                                            Text("Date")
-                                                .font(.subheadline)
-                                                .foregroundColor(.secondary)
-                                            Text(taskDateStore.TaskDate, style: .date)
-                                                .font(.body)
-                                                .foregroundColor(.primary)
-                                        }
-                                        Spacer()
-                                        Image(systemName: "chevron.right")
-                                            .foregroundColor(.gray)
-                                    }
-                                    .padding()
-                                    .background(Color(UIColor.secondarySystemBackground))
-                                    .cornerRadius(10)
-                                }
-
                                 // Time Picker Button
                                 Button(action: {
                                     focusedField = nil
@@ -169,46 +138,34 @@ struct AddTaskView: View {
                                         .cornerRadius(10)
                                     }
                                 }
+                                
+                                // Date Picker Button
+                                Button(action: {
+                                    focusedField = nil
+                                    showDatePicker = true
+                                }) {
+                                    HStack {
+                                        Image(systemName: "calendar")
+                                            .foregroundColor(themeColor)
+                                        VStack(alignment: .leading) {
+                                            Text("Date")
+                                                .font(.subheadline)
+                                                .foregroundColor(.secondary)
+                                            Text(taskDateStore.TaskDate, style: .date)
+                                                .font(.body)
+                                                .foregroundColor(.primary)
+                                        }
+                                        Spacer()
+                                        Image(systemName: "chevron.right")
+                                            .foregroundColor(.gray)
+                                    }
+                                    .padding()
+                                    .background(Color(UIColor.secondarySystemBackground))
+                                    .cornerRadius(10)
+                                }
                             }
                             .padding(.horizontal, 20)
                         }
-
-                        Spacer()
-
-                        // Save Task Button
-                        Button(action: {
-                            focusedField = nil
-                            taskStore.addTask(
-                                title: taskTitle,
-                                note: taskNote,
-                                date: ZeroOutSeconds(from: taskDateStore.TaskDate) ?? Date(),
-                                time: ZeroOutSeconds(from: selectedTime),
-                                deadline: ZeroOutSeconds(from: selectedDeadline)
-                            )
-                            dismiss()
-                        }) {
-                            HStack {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .font(.headline)
-                                Text("Save Task")
-                                    .fontWeight(.bold)
-                                    .font(.headline)
-                            }
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(
-                                LinearGradient(
-                                    gradient: Gradient(colors: [themeColor, themeColor.opacity(0.7)]),
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .cornerRadius(15)
-                            .shadow(color: themeColor.opacity(0.4), radius: 5, x: 0, y: 3)
-                            .padding(.horizontal, 20)
-                        }
-                        .padding(.bottom, 30)
                     }
                 }
             }
@@ -229,7 +186,6 @@ struct AddTaskView: View {
                     }) {
                         HStack {
                             Text("Cancel")
-                                .fontWeight(.semibold)
                         }
                         .foregroundColor(.indigo)
                     }
@@ -248,7 +204,7 @@ struct AddTaskView: View {
                         dismiss()
                     }) {
                         HStack {
-                            Text("Done")
+                            Text("Add Task")
                                 .fontWeight(.semibold)
                         }
                         .foregroundColor(.indigo)

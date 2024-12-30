@@ -61,9 +61,7 @@ struct TaskMainFooter: View {
 
             // Add Task Button
             Button(action: {
-                withAnimation {
-                    editTask.toggle()
-                }
+                editTask.toggle()
             }) {
                 HStack {
                     Image(systemName: "plus")

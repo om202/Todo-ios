@@ -18,7 +18,7 @@ struct InProgressAnimation: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading) {
             // Time Description
             HStack {
                 Text(timeDescription)
@@ -41,7 +41,6 @@ struct InProgressAnimation: View {
             .frame(height: height)
         }
         .frame(height: height + 20)
-        .padding(.vertical, 8)
         .onAppear {
             if finishTime != nil { calculateProgress() }
         }
@@ -53,13 +52,13 @@ struct InProgressAnimation: View {
 
     private var timeDescription: String {
         guard let finishTime = finishTime else {
-            return "In Progress"
+            return "In Progress ⏳"
         }
         if globalTime.globalTime >= finishTime {
-            return "Missed Deadline"
+            return "Time Over! ⏰"
         } else {
             let remainingTime = finishTime.timeIntervalSince(globalTime.globalTime)
-            return "In Progress – \(formatTimeInterval(remainingTime)) left"
+            return "In Progress ⏳ – \(formatTimeInterval(remainingTime)) left"
         }
     }
 
